@@ -1,3 +1,7 @@
-# Oh, hi.
+# CrowdCards
 
-This is a test zone for the CrowdCards Turborepo experiment. We're working as fast as we can to get this out ASAP!
+## Development warning! This is the new Monorepo version of CrowdCards. Things shall be broken, here be dragons!
+
+A TCG by ErisWS. 
+
+
