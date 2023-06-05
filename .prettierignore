@@ -7,6 +7,10 @@ node_modules
 .env.*
 !.env.example
 vite.config.js*
+apps/web/build
+apps/web/.svelte-kit
+.turbo
+.config
 
 # Ignore files for PNPM, NPM and YARN
 pnpm-lock.yaml

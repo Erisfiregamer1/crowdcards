@@ -17,12 +17,12 @@ jobs:
     steps:
       - name: Clone repository
         uses: actions/checkout@v2
-        
+
       - name: Deploy to Deno Deploy
         uses: denoland/deployctl@v1
         with:
           project: crowdcards
-          entrypoint: 'apps/web/build/index.js'
+          entrypoint: "apps/web/build/index.js"
 
       - name: Run Lighthouse CI
         run: |

@@ -1,7 +1,7 @@
 import adapter from "svelte-adapter-deno";
 import preprocess from "svelte-preprocess";
 // you don't need to do this if you're using generateSW strategy in your app
-const generateSW = true
+const generateSW = true;
 /** @type {import('@sveltejs/kit').Config}*/
 const config = {
   // Consult https://github.com/sveltejs/svelte-preprocess
@@ -10,7 +10,11 @@ const config = {
   kit: {
     csp: {
       directives: {
-        "script-src": ["self", "https://cdn.jsdelivr.net/npm/eruda", "https://jscdn.glitch.me/cdn/authflow.js"],
+        "script-src": [
+          "self",
+          "https://cdn.jsdelivr.net/npm/eruda",
+          "https://jscdn.glitch.me/cdn/authflow.js",
+        ],
         "object-src": ["none"],
         "base-uri": ["none"],
       },
