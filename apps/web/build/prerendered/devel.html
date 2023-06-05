@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./cclogo.svg" type="image/svg+xml" />
+    <link rel="alternate icon" href="./favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/cclogo.png" />
+    <link rel="mask-icon" href="/cclogo.svg" color="#FFFFFF" />
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
+    <meta name="theme-color" content="#ffffff" />
+    <script src="https://jscdn.glitch.me/cdn/authflow.js" crossorigin="anonymous"></script>
+    <meta name="description" content="CrowdCards is a trading card game where everyone can make a card." />
+    <meta http-equiv="content-security-policy" content="object-src 'none'; script-src 'self' https://cdn.jsdelivr.net/npm/eruda https://jscdn.glitch.me/cdn/authflow.js 'sha256-OwfcojGtELwWM/YuEwxYYx1TvLS0HXcrQ20vSTnnpF8='; base-uri 'none'">
+		<link href="./_app/immutable/assets/_virtual_pwa-info.203d7f71.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.3e2847fd.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.5b37bd6f.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.c185ea9d.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.d5b6d45d.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/preload-helper.5e4dbdac.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/0.3406f0ed.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/2.77f1360f.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/_virtual_pwa-info.34fecbf8.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/navigation.732952cc.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/8.55ccf297.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/Label.893a0b14.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/confetti.module.22f2780f.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/sweetalert2.all.fe32f612.js"><!-- HEAD_svelte-13srx9e_START --><!-- HTML_TAG_START --><link rel="manifest" href="/manifest.webmanifest"><!-- HTML_TAG_END --><!-- HEAD_svelte-13srx9e_END -->
+  </head>
+  <body class="border-8 border-transparent bg-[#222]">
+    <div>
+
+
+
+
+<nav class="font-roboto flex items-center justify-between bg-[#333] px-2.5 py-[7px] text-white" id="a"><div class="flex items-center"><a href="/"><img class="mr-[30px] inline-block h-auto w-[3.12rem]" src="/cclogo-layout.svg" alt="Logo"></a>
+    <div class="space-x-3.5"><a href="/add_card">Create Card</a>
+      <a href="/new_cards">View Community Cards</a>
+      <a href="/verified_cards">View Approved Cards</a></div></div>
+  <div class="mr-3"><a href="/offline" id="offline" class="mr-3 text-red-800" aria-label="The offline button that appears when the site is disconnected from the internet."></a>
+
+    <a href="/admin" id="admin" aria-label="The admin button." class="mr-1"></a>
+    <a href="/login" id="login-btn">Login </a>
+    <a href="/settings"><img class="ml-[20px] inline-block h-auto w-[1.5rem]" src="https://cdn.glitch.global/3de90402-af4c-426a-b746-6b7cb6f31203/139-1393405_file-gear-icon-svg-wikimedia-commons-gear-icon-removebg-preview.png" alt="Settings"></a></div></nav>
+
+<br>
+
+<div class="border-2 border-transparent text-white" id="c"><div id="hmm"><div id="modal"></div>
+  </div>
+
+<div class="rounded-lg shadow-sm bg-[#222] text-white"><div class="flex flex-col p-6 space-y-1"><h3 class="font-semibold tracking-tight text-2xl">Login to an account</h3>
+    <p class="text-muted-foreground text-sm">Choose your login method.</p></div>
+  <div class="p-6 pt-0 grid gap-4"><div class="grid grid-cols-3 gap-4"><button class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input hover:bg-accent hover:text-accent-foreground h-10 py-2 px-4 bg-slate-950"><img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" class="mr-2 h-4 w-4">
+        <img src="https://authflow.glitch.me/assets/favicon.svg" class="mr-2 h-4 w-4">
+        Google (Via Authflow)
+      </button>
+      <button class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input hover:bg-accent hover:text-accent-foreground h-10 py-2 px-4 bg-slate-950">Passwordless via Webauthn</button>
+      <button class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input hover:bg-accent hover:text-accent-foreground h-10 py-2 px-4 bg-slate-950"><img class="mr-2 h-4 w-4">
+
+        ErisWS
+      </button></div>
+
+    <button class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input hover:bg-accent hover:text-accent-foreground h-10 py-2 px-4 bg-slate-950">Switch to creating account</button>
+
+    <div class="relative"><div class="absolute inset-0 flex items-center"><span class="w-full border-t"></span></div>
+      <div class="relative flex justify-center text-xs uppercase"><span class="text-muted-foreground bg-[#222] px-2 text-white">Or continue with </span></div></div>
+    <div class="grid gap-2"><label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="username">Username</label>
+      <input class="border-input ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border bg-transparent px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" id="username" type="username"></div>
+    <div class="grid gap-2"><label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="password">Password</label>
+      <input class="border-input ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border bg-transparent px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" id="password" type="password"></div></div>
+  <div class="flex items-center p-6 pt-0"><button class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-primary text-primary-foreground hover:bg-primary/90 h-10 py-2 px-4 w-full">Login</button></div></div></div>
+
+
+
+
+			
+			<script>
+				{
+					__sveltekit_rjf9kj = {
+						base: new URL(".", location).pathname.slice(0, -1),
+						env: {}
+					};
+
+					const element = document.currentScript.parentElement;
+
+					const data = [null,null,null];
+
+					Promise.all([
+						import("./_app/immutable/entry/start.3e2847fd.js"),
+						import("./_app/immutable/entry/app.d5b6d45d.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element, {
+							node_ids: [0, 2, 8],
+							data,
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+  </body>
+</html>
