@@ -4,7 +4,7 @@
     "start": "turbo run dev",
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "deploy": "git add -A && git commit -m 'Production Push'"
+    "deploy": "git add -A && git commit -m 'Production Push'",
     "lint": "turbo run lint",
     "format": "prettier --write ."
   },
