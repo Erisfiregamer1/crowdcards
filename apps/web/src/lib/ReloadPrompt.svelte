@@ -1,5 +1,5 @@
 <script lang="ts">
-  //import { useRegisterSW } from "virtual:pwa-register/svelte";
+  import { useRegisterSW } from "virtual:pwa-register/svelte";
 
   import { get } from "svelte/store";
 
@@ -7,7 +7,7 @@
   let buildDate = __DATE__;
   let reloadSW = __RELOAD_SW__;
 
-  /*const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW({
+  const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW({
     onRegistered(r) {
       if (reloadSW) {
         r &&
@@ -44,5 +44,5 @@
         }
       });
     }
-  });*/
+  });
 </script>
