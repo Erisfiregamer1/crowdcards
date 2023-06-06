@@ -16,6 +16,8 @@ self.addEventListener("message", (event) => {
   if (event.data && event.data.type === "SKIP_WAITING") self.skipWaiting();
 });
 
+// Push code
+
 self.addEventListener("push", (e) => {
   const data = e.data.json();
   let promises = [];
@@ -43,6 +45,8 @@ precacheAndRoute(self.__WB_MANIFEST);
 
 import { ExpirationPlugin } from 'workbox-expiration';
 import { BackgroundSyncPlugin } from 'workbox-background-sync';
+
+// You're not allowed to take my Background Sync from me!
 
 registerRoute(
   /^https:\/\/crowdcards-api\.glitch\.me\/api\/.*/,
