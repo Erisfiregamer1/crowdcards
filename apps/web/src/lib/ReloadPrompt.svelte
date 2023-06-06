@@ -3,16 +3,9 @@
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/prompt-sw.js', { scope: '/' })
   })
-}
-
-  /*offlineReady.subscribe((offlr) => {
-    if (offlr === true) {
-      console.log("[DEV] Site ready to work offline!");
-    }
-  });
-  needRefresh.subscribe((neerf) => {
-    if (neerf === true) {
-      Swal.fire({
+    
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    Swal.fire({
         title: "Refresh required!",
         text: "New site content has been loaded! To see it, you'll have to refresh the site.",
         icon: "warning",
@@ -24,6 +17,6 @@
           window.location.reload();
         }
       });
-    }
-  });*/
+});
+}
 </script>
