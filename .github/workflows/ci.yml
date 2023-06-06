@@ -38,7 +38,7 @@ jobs:
         with:
           project: crowdcards
           entrypoint: apps/web/build/index.js
-          cwd: apps/web/build
+          root: apps/web/build
 
       - name: Run Lighthouse CI
         run: |
