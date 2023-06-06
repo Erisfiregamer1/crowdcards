@@ -7,6 +7,7 @@ import {
   createHandlerBoundToURL,
   precacheAndRoute,
 } from "workbox-precaching";
+import { clientsClaim } from 'workbox-core'
 import {NetworkFirst} from 'workbox-strategies';
 import { NavigationRoute, registerRoute } from "workbox-routing";
 
@@ -101,3 +102,6 @@ if (import.meta.env.DEV) allowlist = [/^\/$/];
 
 // to allow work offline
 registerRoute(new NavigationRoute(createHandlerBoundToURL("/"), { allowlist }));
+
+self.skipWaiting()
+clientsClaim()
