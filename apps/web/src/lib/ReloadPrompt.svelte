@@ -6,4 +6,5 @@
   window.location.reload();
 });
   })
+  }
 </script>
