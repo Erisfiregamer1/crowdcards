@@ -19,6 +19,7 @@ const config = {
     ViteImageOptimizer(),
     SvelteKitPWA({
       registerType: 'autoUpdate',
+      injectRegister: 'null',
       srcDir: './src',
       mode: 'production',
       // you don't need to do this if you're using generateSW strategy in your app
