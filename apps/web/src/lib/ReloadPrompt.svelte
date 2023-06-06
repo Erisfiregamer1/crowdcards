@@ -3,9 +3,16 @@
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('/prompt-sw.js', { scope: '/' })
       
-      navigator.serviceWorker.addEventListener('controllerchange', () => {
-  window.location.reload();
-});
+      let isControlled = Boolean(navigator.serviceWorker.controller);
+
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (isControlled) {
+      window.location.reload();
+    } else {
+      isControlled = true;
+    }
+  });
+
     })
   }
 </script>
