@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "start": "turbo run dev",
+    "start": "turbo run build && turbo run preview",
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lhci": "lhci autorun",
