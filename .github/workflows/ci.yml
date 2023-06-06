@@ -37,7 +37,7 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: crowdcards
-          entrypoint: apps/web/build/index.js
+          entrypoint: index.js
           root: apps/web/build
 
       - name: Run Lighthouse CI
