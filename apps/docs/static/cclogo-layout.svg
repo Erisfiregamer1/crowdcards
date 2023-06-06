@@ -1,0 +1,14 @@
+<svg width="120" height="100" xmlns="http://www.w3.org/2000/svg">
+ <g>
+  <title>Layer 1</title>
+  <path id="svg_11" d="m63.43284,138.0597" opacity="NaN" stroke-width="0" stroke="#000" fill="#000000"/>
+  <g id="svg_2">
+   <text transform="rotate(-34 82.9658 69.0904) matrix(1.13019 0 0 1.10191 -22.635 -77.5829)" stroke="#FFF" xml:space="preserve" text-anchor="start" font-family="'Archivo'" font-size="20" id="svg_9" y="139.82786" x="58.0115" stroke-width="0" fill="#FFFFFF">CARDS</text>
+   <g id="svg_1">
+    <text transform="rotate(-31 36.4312 26.7517) matrix(0.802684 0 0 0.830416 3.87859 116.783)" stroke="#FFF" font-weight="bold" xml:space="preserve" text-anchor="start" font-family="'Merriweather Sans'" font-size="24" id="svg_6" y="-99.84572" x="-4.46738" stroke-width="0" fill="#FFFFFF">CROWD</text>
+    <path transform="rotate(-90 58.6861 51.985)" stroke="#000" id="svg_8" d="m49.25706,-6.2282l17.77146,32.77235l-7.3279,3.86765l22.37766,28.07873l-7.32461,4.68926l27.66347,47.0193l-46.92218,-36.03255l8.94975,-5.00391l-29.154,-23.07918l10.44685,-7.13222l-30.78242,-24.21107l34.30191,-20.96836l0.00001,0z" stroke-width="0" fill="#FFF093"/>
+   </g>
+  </g>
+ </g>
+
+</svg>
