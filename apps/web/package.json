@@ -12,12 +12,10 @@
     "format": "prettier --write --ignore-path=../../.prettierignore ."
   },
   "devDependencies": {
-    "@sveltejs/adapter-static": "^2.0.1",
     "@sveltejs/kit": "^1.11.0",
     "@types/cookie": "^0.5.1",
     "@typescript-eslint/eslint-plugin": "^5.54.1",
     "@typescript-eslint/parser": "^5.54.1",
-    "dependency-cruiser": "^13.0.0",
     "eslint": "^8.35.0",
     "eslint-plugin-svelte3": "^4.0.0",
     "svelte": "^3.55.1",
@@ -31,7 +29,6 @@
   "dependencies": {
     "@fontsource/fira-mono": "^4.5.10",
     "@simplewebauthn/browser": "^7.2.0",
-    "@sveltejs/adapter-node": "^1.2.4",
     "@vite-pwa/sveltekit": "^0.2.1",
     "autoprefixer": "^10.4.14",
     "canvas-confetti": "^1.6.0",
@@ -43,7 +40,6 @@
     "prettier-plugin-svelte": "^2.10.0",
     "prettier-plugin-tailwindcss": "^0.2.7",
     "radix-svelte": "^0.7.1",
-    "rollup-plugin-terser": "^7.0.2",
     "sharp": "^0.32.1",
     "snyk": "^1.1154.0",
     "svelte-adapter-deno": "^0.9.0",
