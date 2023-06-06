@@ -12,15 +12,23 @@
     "format": "prettier --write --ignore-path=../../.prettierignore ."
   },
   "devDependencies": {
-    "@sveltejs/adapter-auto": "latest",
-    "@sveltejs/kit": "latest",
-    "eslint-config-custom": "*",
-    "svelte": "^3.44.0",
-    "svelte-check": "^2.7.1",
-    "svelte-preprocess": "^4.10.6",
-    "tslib": "^2.3.1",
-    "typescript": "^4.7.2",
-    "vite": "^4.0.0",
+    "@sveltejs/adapter-static": "^2.0.1",
+    "@sveltejs/kit": "^1.11.0",
+    "@types/cookie": "^0.5.1",
+    "@typescript-eslint/eslint-plugin": "^5.54.1",
+    "@typescript-eslint/parser": "^5.54.1",
+    "dependency-cruiser": "^13.0.0",
+    "eslint": "^8.35.0",
+    "eslint-plugin-svelte3": "^4.0.0",
+    "svelte": "^3.55.1",
+    "svelte-check": "^3.1.0",
+    "svelte-preprocess": "^5.0.1",
+    "tslib": "^2.5.0",
+    "typescript": "^4.9.5",
+    "vite": "^4.1.4"
+  },
+  "type": "module",
+  "dependencies": {
     "@fontsource/fira-mono": "^4.5.10",
     "@simplewebauthn/browser": "^7.2.0",
     "@sveltejs/adapter-node": "^1.2.4",
@@ -45,7 +53,7 @@
     "tailwindcss": "^3.3.2",
     "tailwindcss-animate": "^1.0.5",
     "terser": "^5.17.3",
-    "vite-plugin-image-optimizer": "^1.1.4"
-  },
-  "type": "module"
+    "vite-plugin-image-optimizer": "^1.1.4",
+    "turbo": "^1.10.1"
+  }
 }
