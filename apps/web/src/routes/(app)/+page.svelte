@@ -20,5 +20,5 @@
 </div>
 <br />
 <div class="text-red-900">
-  Warning! CrowdCards is still in Beta Testing, so stuff will be broken. Like now, as you can see the router is broken.
+  Warning! CrowdCards is still in Beta Testing, so stuff will be broken.
 </div>
