@@ -70,7 +70,7 @@
                   Swal.fire({
                     icon: "error",
                     title: "Not logged in!",
-                    text: "You're not logged in! Log in to upvote cards!",
+                    text: "You're not logged in! Log in to downvote cards!",
                   });
                 } else if (voted === false) {
                 Swal.fire({
