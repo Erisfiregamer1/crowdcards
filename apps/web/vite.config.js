@@ -3,7 +3,7 @@ import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 import { terser } from 'rollup-plugin-terser';
 import { SvelteKitPWA } from '@vite-pwa/sveltekit';
 
-const generateSW = true;
+const generateSW = false;
 
 /** @type {import('vite').UserConfig} */
 const config = {
