@@ -26,7 +26,7 @@
 
   offlineReady.subscribe((offlr) => {
     if (offlr === true) {
-      console.log("Site ready to work offline!");
+      console.log("[DEV] Site ready to work offline!");
     }
   });
   needRefresh.subscribe((neerf) => {
