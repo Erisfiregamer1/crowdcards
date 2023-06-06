@@ -18,9 +18,8 @@ const config = {
     terser(),
     ViteImageOptimizer(),
     SvelteKitPWA({
-      registerType: 'autoUpdate',
       injectRegister: 'null',
-      srcDir: './src',
+      srcDir: 'src',
       mode: 'production',
       // you don't need to do this if you're using generateSW strategy in your app
       strategies: generateSW ? 'generateSW' : 'injectManifest',
