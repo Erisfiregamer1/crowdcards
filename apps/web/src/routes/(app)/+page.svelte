@@ -20,5 +20,5 @@
 </div>
 <br />
 <div class="text-[#EF5353]">
-  Warning! CrowdCards is still in Beta Testing, so stuff will be broken. :(
+  Warning! CrowdCards is still in Beta Testing, so stuff will be broken. The current version is "[DEV] Beta 3."
 </div>
