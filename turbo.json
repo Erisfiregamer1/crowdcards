@@ -4,7 +4,7 @@
     "build": {
       "dependsOn": ["^build"],
       "outputs": [".svelte-kit/**", "build/**"],
-      "inputs": ["src/**/*.*", "static/**/*.*"]
+      "inputs": ["src/**/*.*", "static/**/*.*", "vite.config.js", "svelte.config.js", "tsconfig.json", "postcss.config.cjs", "tailwind.config.cjs"]
     },
     "lint": {},
     "dev": {
