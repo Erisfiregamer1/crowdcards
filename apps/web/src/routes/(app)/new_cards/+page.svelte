@@ -65,7 +65,13 @@
             });
 
             downvote.addEventListener("click", () => {
-              if (voted === false) {
+                if (!localStorage.getItem("sessionToken")) {
+                  Swal.fire({
+                    icon: "error",
+                    title: "Not logged in!",
+                    text: "You're not logged in! Log in to upvote cards!",
+                  });
+                } else if (voted === false) {
                 Swal.fire({
                   icon: "question",
                   text: "Are you sure you want to downvote this card? There is no way to reverse this!",
@@ -126,7 +132,13 @@
             });
 
             upvote.addEventListener("click", () => {
-              if (voted === false) {
+              if (!localStorage.getItem("sessionToken")) {
+                  Swal.fire({
+                    icon: "error",
+                    title: "Not logged in!",
+                    text: "You're not logged in! Log in to upvote cards!",
+                  });
+                } else if (voted === false) {
                 Swal.fire({
                   icon: "question",
                   text: "Are you sure you want to upvote this card? There is no way to reverse this!",
