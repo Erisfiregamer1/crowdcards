@@ -19,6 +19,6 @@
   <a href="https://cdn.glitch.global/d24a8d52-d1f8-43e5-a4b9-2b8939c0a945/CrowdCards%20TOS%20planning.pdf">[here]</a>. Please read it before uploading a card or making an account.
 </div>
 <br />
-<div class="text-red-900">
+<div class="text-red-700">
   Warning! CrowdCards is still in Beta Testing, so stuff will be broken. :(
 </div>
