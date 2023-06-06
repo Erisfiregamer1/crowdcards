@@ -7,6 +7,12 @@ const generateSW = true;
 
 /** @type {import('vite').UserConfig} */
 const config = {
+  define: {
+    __DATE__: `'${new Date().toISOString()}'`,
+    __RELOAD_SW__: true,
+    "process.env.NODE_ENV":
+      process.env.NODE_ENV === "production" ? '"production"' : '"development"',
+  },
   plugins: [
     sveltekit(),
     terser(),
