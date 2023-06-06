@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Swal from sweetalert2
+  import Swal from "sweetalert2"
   
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
