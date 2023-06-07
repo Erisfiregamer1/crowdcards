@@ -3,7 +3,6 @@
   import { goto } from "$app/navigation";
   import { messageAction } from "svelte-legos";
   import Swal from "sweetalert2";
-  import ParticleNetwork from "canvas-particle-network"
   import { Button } from "$components/ui/button";
   import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "$components/ui/card";
   import { Input } from "$components/ui/input";
