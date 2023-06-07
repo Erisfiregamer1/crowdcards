@@ -22,6 +22,11 @@
 
         navigator.serviceWorker.addEventListener("controllerchange", () => {
           if (isControlled) {
+            
+            
+          const b = document.getElementById("status");
+      b.innerHTML = "";
+
             Swal.fire({
               title: "Refresh required!",
               text: "New site content has been loaded! To see it, you'll have to refresh the site.",
@@ -136,7 +141,7 @@
     </div>
   </div>
   <div class="mr-3">
-    <div id="status" aria-label="The installing notice for the site's service worker." />
+    <a id="status" aria-label="The installing notice for the site's service worker." />
     <a href="/offline" id="offline" class="mr-3 text-red-800" aria-label="The offline button that appears when the site is disconnected from the internet." />
 
     <a href="/admin" id="admin" aria-label="The admin button." class="mr-1" />
