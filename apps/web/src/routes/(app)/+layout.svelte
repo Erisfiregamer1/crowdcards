@@ -12,7 +12,9 @@
 
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
-        navigator.serviceWorker.register("/prompt-sw.js", { scope: "/" });
+        navigator.serviceWorker.register("/prompt-sw.js", { scope: "/" }).then((reg) => {
+          console.log(`New service worker registered, registration is ${reg}`)
+        });
 
         let isControlled = Boolean(navigator.serviceWorker.controller);
 
