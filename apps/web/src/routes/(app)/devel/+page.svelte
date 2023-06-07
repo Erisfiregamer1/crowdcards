@@ -47,7 +47,12 @@
   }
   
   onMount(async () => {
-    
+    var options = {
+    particleColor: '#000',
+    speed: 'medium',
+    density: 'medium'
+};
+var particleCanvas = new ParticleNetwork(document.getElementById('background'), options);
   })
 </script>
 
