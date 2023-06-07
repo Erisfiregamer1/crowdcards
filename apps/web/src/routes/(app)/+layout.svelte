@@ -14,6 +14,12 @@
       window.addEventListener("load", () => {
         navigator.serviceWorker.register("/prompt-sw.js", { scope: "/" }).then((reg) => {
           console.log(`New service worker registered, registration is ${reg}`)
+          
+          if (reg.installing) {
+            console.log("Service worker installing")
+          } else if (reg.active) {
+            console.log("Service worker active")
+          }
         });
 
         let isControlled = Boolean(navigator.serviceWorker.controller);
