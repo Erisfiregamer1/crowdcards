@@ -45,6 +45,10 @@
 
     newElement.click();
   }
+  
+  onMount(async () => {
+    
+  })
 </script>
 
 <div id="background" class="-z-50 h-full w-full"></div>
