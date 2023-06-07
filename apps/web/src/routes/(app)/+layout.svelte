@@ -149,7 +149,7 @@
     </div>
   </div>
   <div class="mr-3">
-    <div id="status" aria-label="The installing notice for the site's service worker." />
+    <div id="status" aria-label="The installing notice for the site's service worker" />
     <a href="/offline" id="offline" class="mr-3 text-red-800" aria-label="The offline button that appears when the site is disconnected from the internet." />
 
     <a href="/admin" id="admin" aria-label="The admin button." class="mr-1" />
