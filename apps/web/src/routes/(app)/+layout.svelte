@@ -160,7 +160,7 @@
   </div>
 </nav>
 
-<br />
+<br class="bg-transparent"/>
 
 <div class="border-2 border-transparent text-white" id="c">
   <slot />
