@@ -41,14 +41,31 @@
 
     newElement.click();
   }
+  onMount(async () => {
+    var options = {
+    particleColor: '#F2F2F2',
+    background: '#222',
+    speed: 'high',
+    density: 'medium',
+      interactive: false
+};
+var particleCanvas = new ParticleNetwork(document.getElementById('background'), options);
+    
+    document.getElementById("background").style = null
+  })
 </script>
+
 
 <div id="hmm">
   <div id="modal" />
   <!-- An empty div for shenanagins involving le funny messageAction -->
 </div>
 
-<Card class="bg-[#222] text-white">
+<!-- The background div (A canvas is added inside on code execution, I can provide the code. Everything below this is content) -->
+<div id="a" class="relative overflow-hidden">
+<div id="background" class="h-screen w-screen absolute"></div>
+
+<Card class="bg-transparent	text-white z-[900] relative">
   <CardHeader class="space-y-1">
     <CardTitle class="text-2xl">Create an account</CardTitle>
     <CardDescription>Choose your account creation method.</CardDescription>
@@ -77,16 +94,17 @@
         <span class="text-muted-foreground bg-[#222] px-2 text-white"> Or continue with </span>
       </div>
     </div>
-    <div class="grid gap-2">
+<div class="grid gap-2">
       <Label for="username">Username</Label>
-      <Input id="username" type="username" />
+      <Input id="username" type="username" class="bg-[#222]"/>
     </div>
     <div class="grid gap-2">
       <Label for="password">Password</Label>
-      <Input id="password" type="password" />
+      <Input id="password" type="password" class="bg-[#222]"/>
     </div>
   </CardContent>
   <CardFooter>
     <Button class="w-full" on:click={loginNormally}>Create Account</Button>
   </CardFooter>
 </Card>
+  </div>
