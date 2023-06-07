@@ -8,17 +8,6 @@
   import { Input } from "$components/ui/input";
   import { Label } from "$components/ui/label";
   
-  var bgDiv = document.getElementById('background');
-  
-  var options = {
-  particleColor: '#000',
-  speed: 'medium',
-  density: 'high'
-};
-
-var particleCanvas = new ParticleNetwork(bgDiv, options);
-
-  
   $: title = `CrowdCards - Login (NEW)`;
   
   const abortController = new AbortController(); // Used to cancel the Webauthn call we use later
