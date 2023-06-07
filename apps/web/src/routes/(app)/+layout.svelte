@@ -11,11 +11,9 @@
     goto(`/${window.location.href.match(new RegExp("(?<=https://.*/).*"))}`);
 
     if ("serviceWorker" in navigator) {
-        console.log("a")
+          navigator.serviceWorker.register("/prompt-sw.js").then((reg) => {
         
-        navigator.serviceWorker.register("/prompt-sw.js").then((reg) => {
-        
-          console.log("Service worker loaded, registration is", reg)
+          console.log("Service worker registered / loaded, registration is", reg)
           
           reg.addEventListener("updatefound", () => {
     console.log("Service Worker update found!");
