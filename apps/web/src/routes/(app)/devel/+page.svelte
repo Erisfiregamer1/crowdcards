@@ -10,8 +10,6 @@
 
   $: title = `CrowdCards - Login (NEW)`;
   
-  var particleCanvas = new ParticleNetwork(document.getElementById('background'), {})
-
   const abortController = new AbortController(); // Used to cancel the Webauthn call we use later
 
   function loginWithWebauthn() {
