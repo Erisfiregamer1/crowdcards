@@ -64,7 +64,7 @@ var particleCanvas = new ParticleNetwork(document.getElementById('background'), 
 </div>
 
 <div class="relative">
-<div id="background" class="-z-50 h-screen w-screen"></div>
+<div id="background" class="-z-50 h-screen w-screen absolute inset-0"></div>
 
 <Card class="bg-[#222] text-white">
   <CardHeader class="space-y-1">
