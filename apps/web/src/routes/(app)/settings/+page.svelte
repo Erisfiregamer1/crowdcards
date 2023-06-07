@@ -6,38 +6,37 @@
   const verifyRegisterEndpoint = "https://crowdcards-api.glitch.me/webauthn/register/verify";
   const authenticateEndpoint = "https://crowdcards-api.glitch.me/webauthn/authenticate";
   const verifyAuthenticateEndpoint = "https://crowdcards-api.glitch.me/webauthn/authenticate/verify";
-  
-  function enablenotifs() {
-  if (!("Notification" in window)) {
-    Swal.fire({
-      icon: "error",
-      title: "Not supported!",
-      text: "Apologies, but this browser doesn't support notifications yet.",
-    });
-  } else if (Notification.permission === "granted") {
-    Swal.fire({
-      icon: "alert",
-      title: "Already enabled!",
-      text: "You already gave us notification permissions. No need to give them to us again!",
-    });
-  } else if (Notification.permission !== "denied") {
-    Notification.requestPermission().then((permission) => {
-      if (permission === "granted") {
-        const notification = new Notification("Thanks!", {
-          body: "You've enabled notifications for CrowdCards! We'll send you notifications when stuff happens (Namely, your cards have a status change).",
-          icon: "https://cdn.glitch.com/560ed5ed-9d00-433a-9ff9-7750d79d13da%2FGlitch_TeamAvatar.png?v=1624643105812",
-        });
-        
-        Swal.fire({
-      icon: "success",
-      title: "Enabled!",
-      text: "Notifications enabled! You should see one right now. :)",
-    });
-      }
-    });
-  }
-}
 
+  function enablenotifs() {
+    if (!("Notification" in window)) {
+      Swal.fire({
+        icon: "error",
+        title: "Not supported!",
+        text: "Apologies, but this browser doesn't support notifications yet.",
+      });
+    } else if (Notification.permission === "granted") {
+      Swal.fire({
+        icon: "alert",
+        title: "Already enabled!",
+        text: "You already gave us notification permissions. No need to give them to us again!",
+      });
+    } else if (Notification.permission !== "denied") {
+      Notification.requestPermission().then((permission) => {
+        if (permission === "granted") {
+          const notification = new Notification("Thanks!", {
+            body: "You've enabled notifications for CrowdCards! We'll send you notifications when stuff happens (Namely, your cards have a status change).",
+            icon: "https://cdn.glitch.com/560ed5ed-9d00-433a-9ff9-7750d79d13da%2FGlitch_TeamAvatar.png?v=1624643105812",
+          });
+
+          Swal.fire({
+            icon: "success",
+            title: "Enabled!",
+            text: "Notifications enabled! You should see one right now. :)",
+          });
+        }
+      });
+    }
+  }
 
   function logout() {
     localStorage.removeItem("uuid");
@@ -165,8 +164,7 @@
 <br />
 <br />
 <button on:click={logout} class="mb-4 rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700"> Log Out </button>
-<button on:click={enablenotifs} class="mb-4 rounded bg-green-500 px-4 py-2 font-bold text-white hover:bg-red-green"> Enable Notifications </button>
-
+<button on:click={enablenotifs} class="hover:bg-red-green mb-4 rounded bg-green-500 px-4 py-2 font-bold text-white"> Enable Notifications </button>
 
 <!--<form id="settings">
   <br />

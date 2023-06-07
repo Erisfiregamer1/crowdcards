@@ -10,20 +10,20 @@
     <link rel="mask-icon" href="/cclogo.svg" color="#FFFFFF" />
     <meta name="msapplication-TileColor" content="#FFFFFF" />
     <meta name="theme-color" content="#ffffff" />
-    <script src="https://jscdn.glitch.me/cdn/authflow.js" crossorigin="anonymous"></script>
+    <script src="https://jscdn.glitch.me/cdn/authflow.js" crossorigin="anonymous" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/eruda">eruda.init()</script>
     <meta name="description" content="CrowdCards is a trading card game where everyone can make a card." />
-    <meta http-equiv="content-security-policy" content="object-src 'none'; script-src 'self' https://cdn.jsdelivr.net/npm/eruda https://jscdn.glitch.me/cdn/authflow.js 'sha256-L05o58ZnxzV7MX0rklxlhBKV96QriUZVTfiZMz2zowo='; base-uri 'none'">
-		<link href="./_app/immutable/assets/_virtual_pwa-info.203d7f71.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.3e2847fd.js">
+    <meta http-equiv="content-security-policy" content="object-src 'none'; script-src 'self' https://cdn.jsdelivr.net/npm/eruda https://jscdn.glitch.me/cdn/authflow.js 'unsafe-inline' 'sha256-hXDDeNBKWyar8Pz9vXhvXqlUlx7kzO7gSsl1HvbQVF0='; base-uri 'none'">
+		<link href="./_app/immutable/assets/_virtual_pwa-info.eb02487f.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.65de0e7a.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.5b37bd6f.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.c185ea9d.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.d5b6d45d.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/preload-helper.5e4dbdac.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.eb597214.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.84e20cb5.js">
 		<link rel="modulepreload" href="./_app/immutable/nodes/0.3406f0ed.js">
-		<link rel="modulepreload" href="./_app/immutable/nodes/2.77f1360f.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/_virtual_pwa-info.34fecbf8.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/navigation.732952cc.js">
-		<link rel="modulepreload" href="./_app/immutable/nodes/17.a147dc66.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/2.26f10928.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/_virtual_pwa-info.6abbea9f.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/navigation.abb71fe0.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/17.194bb95b.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/sweetalert2.all.fe32f612.js"><title>CrowdCards - Verified Cards</title><!-- HEAD_svelte-13srx9e_START --><!-- HTML_TAG_START --><link rel="manifest" href="/manifest.webmanifest"><!-- HTML_TAG_END --><!-- HEAD_svelte-13srx9e_END --><!-- HEAD_svelte-1258swp_START --><!-- HEAD_svelte-1258swp_END -->
   </head>
   <body class="border-8 border-transparent bg-[#222]">
@@ -49,12 +49,10 @@
 <div id="root2"><div id="messagelol">Please wait... (If this is taking too long try reloading the page)</div></div></div>
 
 
-
-
 			
 			<script>
 				{
-					__sveltekit_rjf9kj = {
+					__sveltekit_qb9u0i = {
 						base: new URL(".", location).pathname.slice(0, -1),
 						env: {}
 					};
@@ -64,8 +62,8 @@
 					const data = [null,null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.3e2847fd.js"),
-						import("./_app/immutable/entry/app.d5b6d45d.js")
+						import("./_app/immutable/entry/start.65de0e7a.js"),
+						import("./_app/immutable/entry/app.84e20cb5.js")
 					]).then(([kit, app]) => {
 						kit.start(app, element, {
 							node_ids: [0, 2, 17],

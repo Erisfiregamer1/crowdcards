@@ -14,7 +14,7 @@ const config = {
           "self",
           "https://cdn.jsdelivr.net/npm/eruda",
           "https://jscdn.glitch.me/cdn/authflow.js",
-          "unsafe-inline"
+          "unsafe-inline",
         ],
         "object-src": ["none"],
         "base-uri": ["none"],

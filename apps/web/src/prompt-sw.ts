@@ -7,37 +7,37 @@ import {
   createHandlerBoundToURL,
   precacheAndRoute,
 } from "workbox-precaching";
-import { clientsClaim } from 'workbox-core'
-import {NetworkFirst} from 'workbox-strategies';
+import { clientsClaim } from "workbox-core";
+import { NetworkFirst } from "workbox-strategies";
 import { NavigationRoute, registerRoute } from "workbox-routing";
 
 declare let self: ServiceWorkerGlobalScope;
 
-self.skipWaiting()
+self.skipWaiting();
 
 // Push code
 
-self.addEventListener('push', function (event) {
+self.addEventListener("push", function (event) {
   if (!event.data) {
-    console.log('This push event has no data.');
+    console.log("This push event has no data.");
     return;
   }
   if (!self.registration) {
-    console.log('Service worker does not control the page');
+    console.log("Service worker does not control the page");
     return;
   }
   if (!self.registration || !self.registration.pushManager) {
-    console.log('Push is not supported');
+    console.log("Push is not supported");
     return;
   }
 
   const eventText = event.data.text();
   // Specify default options
   let options = {};
-  let title = '';
+  let title = "";
 
   // Support both plain text notification and json
-  if (eventText.substr(0, 1) === '{') {
+  if (eventText.substr(0, 1) === "{") {
     const eventData = JSON.parse(eventText);
     title = eventData.title;
 
@@ -49,7 +49,7 @@ self.addEventListener('push', function (event) {
 
     // Check expiration if specified
     if (eventData.expires && Date.now() > eventData.expires) {
-      console.log('Push notification has expired');
+      console.log("Push notification has expired");
       return;
     }
   } else {
@@ -67,29 +67,29 @@ self.addEventListener('push', function (event) {
 // self.__WB_MANIFEST is default injection point
 precacheAndRoute(self.__WB_MANIFEST);
 
-import { ExpirationPlugin } from 'workbox-expiration';
-import { BackgroundSyncPlugin } from 'workbox-background-sync';
+import { ExpirationPlugin } from "workbox-expiration";
+import { BackgroundSyncPlugin } from "workbox-background-sync";
 
 // You're not allowed to take my Background Sync from me!
 
 registerRoute(
   /^https:\/\/crowdcards-api\.glitch\.me\/api\/.*/,
   new NetworkFirst({
-    cacheName: 'api-cache',
+    cacheName: "api-cache",
     plugins: [
       new ExpirationPlugin({
         maxEntries: 50,
-        maxAgeSeconds: 30 * 24 * 60 * 60 // 30 days
+        maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
       }),
       new BackgroundSyncPlugin({
-        name: 'syncQueue',
+        name: "syncQueue",
         options: {
-          maxRetentionTime: 24 * 60
-        }
-      })
-    ]
+          maxRetentionTime: 24 * 60,
+        },
+      }),
+    ],
   }),
-  'GET'
+  "GET"
 );
 
 // clean old assets
@@ -101,4 +101,4 @@ if (import.meta.env.DEV) allowlist = [/^\/$/];
 // to allow work offline
 registerRoute(new NavigationRoute(createHandlerBoundToURL("/"), { allowlist }));
 
-clientsClaim()
+clientsClaim();

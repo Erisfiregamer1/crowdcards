@@ -9,20 +9,20 @@ let c = {};
 function m$1(t2) {
   c = t2;
 }
-const h = { app_template_contains_nonce: false, csp: { mode: "auto", directives: { "object-src": ["none"], "script-src": ["self", "https://cdn.jsdelivr.net/npm/eruda", "https://jscdn.glitch.me/cdn/authflow.js"], "base-uri": ["none"], "upgrade-insecure-requests": false, "block-all-mixed-content": false }, reportOnly: { "upgrade-insecure-requests": false, "block-all-mixed-content": false } }, csrf_check_origin: true, track_server_fetches: false, embedded: false, env_public_prefix: "PUBLIC_", hooks: null, preload_strategy: "modulepreload", root: x$1((t2, a2, o2, r2) => {
-  let i2, d2, { stores: c2 } = a2, { page: l2 } = a2, { constructors: m2 } = a2, { components: p2 = [] } = a2, { form: h2 } = a2, { data_0: f2 = null } = a2, { data_1: g = null } = a2, { data_2: v = null } = a2;
-  c$1("__svelte__", c2), c2.page.notify, void 0 === a2.stores && o2.stores && void 0 !== c2 && o2.stores(c2), void 0 === a2.page && o2.page && void 0 !== l2 && o2.page(l2), void 0 === a2.constructors && o2.constructors && void 0 !== m2 && o2.constructors(m2), void 0 === a2.components && o2.components && void 0 !== p2 && o2.components(p2), void 0 === a2.form && o2.form && void 0 !== h2 && o2.form(h2), void 0 === a2.data_0 && o2.data_0 && void 0 !== f2 && o2.data_0(f2), void 0 === a2.data_1 && o2.data_1 && void 0 !== g && o2.data_1(g), void 0 === a2.data_2 && o2.data_2 && void 0 !== v && o2.data_2(v);
+const h = { app_template_contains_nonce: false, csp: { mode: "auto", directives: { "object-src": ["none"], "script-src": ["self", "https://cdn.jsdelivr.net/npm/eruda", "https://jscdn.glitch.me/cdn/authflow.js", "unsafe-inline"], "base-uri": ["none"], "upgrade-insecure-requests": false, "block-all-mixed-content": false }, reportOnly: { "upgrade-insecure-requests": false, "block-all-mixed-content": false } }, csrf_check_origin: true, track_server_fetches: false, embedded: false, env_public_prefix: "PUBLIC_", hooks: null, preload_strategy: "modulepreload", root: x$1((t2, a2, o2, r2) => {
+  let i2, d2, { stores: c2 } = a2, { page: l2 } = a2, { constructors: m2 } = a2, { components: p2 = [] } = a2, { form: h2 } = a2, { data_0: f2 = null } = a2, { data_1: v = null } = a2, { data_2: g = null } = a2;
+  c$1("__svelte__", c2), c2.page.notify, void 0 === a2.stores && o2.stores && void 0 !== c2 && o2.stores(c2), void 0 === a2.page && o2.page && void 0 !== l2 && o2.page(l2), void 0 === a2.constructors && o2.constructors && void 0 !== m2 && o2.constructors(m2), void 0 === a2.components && o2.components && void 0 !== p2 && o2.components(p2), void 0 === a2.form && o2.form && void 0 !== h2 && o2.form(h2), void 0 === a2.data_0 && o2.data_0 && void 0 !== f2 && o2.data_0(f2), void 0 === a2.data_1 && o2.data_1 && void 0 !== v && o2.data_1(v), void 0 === a2.data_2 && o2.data_2 && void 0 !== g && o2.data_2(g);
   do {
     i2 = true, c2.page.set(l2), d2 = `
 
 
 ${m2[1] ? `${w$1(m2[0] || h$1, "svelte:component").$$render(t2, { data: f2, this: p2[0] }, { this: (t3) => {
       p2[0] = t3, i2 = false;
-    } }, { default: () => m2[2] ? `${w$1(m2[1] || h$1, "svelte:component").$$render(t2, { data: g, this: p2[1] }, { this: (t3) => {
+    } }, { default: () => m2[2] ? `${w$1(m2[1] || h$1, "svelte:component").$$render(t2, { data: v, this: p2[1] }, { this: (t3) => {
       p2[1] = t3, i2 = false;
-    } }, { default: () => `${w$1(m2[2] || h$1, "svelte:component").$$render(t2, { data: v, form: h2, this: p2[2] }, { this: (t3) => {
+    } }, { default: () => `${w$1(m2[2] || h$1, "svelte:component").$$render(t2, { data: g, form: h2, this: p2[2] }, { this: (t3) => {
       p2[2] = t3, i2 = false;
-    } }, {})}` })}` : `${w$1(m2[1] || h$1, "svelte:component").$$render(t2, { data: g, form: h2, this: p2[1] }, { this: (t3) => {
+    } }, {})}` })}` : `${w$1(m2[1] || h$1, "svelte:component").$$render(t2, { data: v, form: h2, this: p2[1] }, { this: (t3) => {
       p2[1] = t3, i2 = false;
     } }, {})}` })}` : `${w$1(m2[0] || h$1, "svelte:component").$$render(t2, { data: f2, form: h2, this: p2[0] }, { this: (t3) => {
       p2[0] = t3, i2 = false;
@@ -31,7 +31,7 @@ ${m2[1] ? `${w$1(m2[0] || h$1, "svelte:component").$$render(t2, { data: f2, this
 `;
   } while (!i2);
   return d2;
-}), service_worker: false, templates: { app: ({ head: t2, body: n2, assets: e2, nonce: s2, env: a2 }) => '<!DOCTYPE html>\n<html lang="en">\n  <head>\n    <meta charset="utf-8" />\n    <link rel="icon" href="' + e2 + '/cclogo.svg" type="image/svg+xml" />\n    <link rel="alternate icon" href="' + e2 + '/favicon.ico" />\n    <meta name="viewport" content="width=device-width, initial-scale=1" />\n    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />\n    <link rel="apple-touch-icon" href="/cclogo.png" />\n    <link rel="mask-icon" href="/cclogo.svg" color="#FFFFFF" />\n    <meta name="msapplication-TileColor" content="#FFFFFF" />\n    <meta name="theme-color" content="#ffffff" />\n    <script src="https://jscdn.glitch.me/cdn/authflow.js" crossorigin="anonymous"><\/script>\n    <meta name="description" content="CrowdCards is a trading card game where everyone can make a card." />\n    ' + t2 + '\n  </head>\n  <body class="border-8 border-transparent bg-[#222]">\n    <div>' + n2 + "</div>\n  </body>\n</html>\n", error: ({ status: t2, message: n2 }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<title>' + n2 + `</title>
+}), service_worker: false, templates: { app: ({ head: t2, body: n2, assets: e2, nonce: s2, env: a2 }) => '<!DOCTYPE html>\n<html lang="en">\n  <head>\n    <meta charset="utf-8" />\n    <link rel="icon" href="' + e2 + '/cclogo.svg" type="image/svg+xml" />\n    <link rel="alternate icon" href="' + e2 + '/favicon.ico" />\n    <meta name="viewport" content="width=device-width, initial-scale=1" />\n    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />\n    <link rel="apple-touch-icon" href="/cclogo.png" />\n    <link rel="mask-icon" href="/cclogo.svg" color="#FFFFFF" />\n    <meta name="msapplication-TileColor" content="#FFFFFF" />\n    <meta name="theme-color" content="#ffffff" />\n    <script src="https://jscdn.glitch.me/cdn/authflow.js" crossorigin="anonymous" defer><\/script>\n    <script src="https://cdn.jsdelivr.net/npm/eruda">eruda.init()<\/script>\n    <meta name="description" content="CrowdCards is a trading card game where everyone can make a card." />\n    ' + t2 + '\n  </head>\n  <body class="border-8 border-transparent bg-[#222]">\n    <div>' + n2 + "</div>\n  </body>\n</html>\n", error: ({ status: t2, message: n2 }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<title>' + n2 + `</title>
 
 		<style>
 			body {
@@ -89,7 +89,7 @@ ${m2[1] ? `${w$1(m2[0] || h$1, "svelte:component").$$render(t2, { data: f2, this
 	</head>
 	<body>
 		<div class="error">
-			<span class="status">` + t2 + '</span>\n			<div class="message">\n				<h1>' + n2 + "</h1>\n			</div>\n		</div>\n	</body>\n</html>\n" }, version_hash: "rjf9kj" };
+			<span class="status">` + t2 + '</span>\n			<div class="message">\n				<h1>' + n2 + "</h1>\n			</div>\n		</div>\n	</body>\n</html>\n" }, version_hash: "qb9u0i" };
 function f$1() {
   return {};
 }
