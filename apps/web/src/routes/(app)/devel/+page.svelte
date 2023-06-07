@@ -58,7 +58,7 @@ var particleCanvas = new ParticleNetwork(bgDiv, options);
   }
 </script>
 
-<div id="background" class="-z-50"></div>
+<div id="background" class="-z-50 h-full w-full"></div>
 
 <div id="hmm">
   <div id="modal" />
