@@ -13,26 +13,19 @@
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
         navigator.serviceWorker.register("/prompt-sw.js", { scope: "/" }).then((reg) => {
-          console.log("Service worker loaded, registration is", reg);
-        });
-
-        const registration = await navigator.serviceWorker.getRegistration();
-        if (registration) {
-          registration.addEventListener("updatefound", () => {
-            console.log("Service Worker update found!");
-            const b = document.getElementById("status");
-            b.innerHTML = "Installing...";
-          });
-        }
+        
+          console.log("Service worker loaded, registration is", reg)
+    });
 
         let isControlled = Boolean(navigator.serviceWorker.controller);
 
         navigator.serviceWorker.addEventListener("controllerchange", () => {
           if (isControlled) {
-            console.log("b");
-
-            const b = document.getElementById("status");
-            b.innerHTML = "";
+            
+            console.log("b")
+            
+          const b = document.getElementById("status");
+      b.innerHTML = "";
 
             Swal.fire({
               title: "Refresh required!",
@@ -47,11 +40,12 @@
               }
             });
           } else {
-            console.log("a");
-
-            const b = document.getElementById("status");
-            b.innerHTML = "";
-
+            
+            console.log("a")
+            
+          const b = document.getElementById("status");
+      b.innerHTML = "";
+            
             isControlled = true;
           }
         });
