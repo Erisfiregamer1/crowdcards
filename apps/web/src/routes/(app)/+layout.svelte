@@ -13,17 +13,18 @@
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
         navigator.serviceWorker.register("/prompt-sw.js", { scope: "/" }).then((reg) => {
-          registration.onupdatefound = function() {
-      if (registration.installing) {
-        console.log('A new service worker is being installed. The registration is', reg);
         
-          const b = document.getElementById("status");
-      b.innerHTML = "Installing...";
-      } else {
-        console.log('No new service worker found.');
-      }
+          console.log("Service worker loaded, registration is", reg)
     };
-        });
+        
+        const registration = await navigator.serviceWorker.getRegistration();
+if (registration) {
+  registration.addEventListener("updatefound", () => {
+    console.log("Service Worker update found!");
+    const b = document.getElementById("status");
+      b.innerHTML = "Installing...";
+  });
+}
 
         let isControlled = Boolean(navigator.serviceWorker.controller);
 
