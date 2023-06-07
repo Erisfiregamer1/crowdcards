@@ -3,6 +3,7 @@
   import { goto } from "$app/navigation";
   import { messageAction } from "svelte-legos";
   import Swal from "sweetalert2";
+  import { ParticleNetwork } from "canvas-particle-network"
   import { Button } from "$components/ui/button";
   import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "$components/ui/card";
   import { Input } from "$components/ui/input";
@@ -10,7 +11,7 @@
 
   $: title = `CrowdCards - Login (NEW)`;
   
-  var particleCanvas = new ParticleNetwork(document.getElementById('background')
+  var particleCanvas = new ParticleNetwork(document.getElementById('background'))
 
   const abortController = new AbortController(); // Used to cancel the Webauthn call we use later
 
@@ -49,9 +50,9 @@
   }
 </script>
 
-<div id="background"></div>
+<div id="background" class="-z-50"></div>
 
-<div id="hmm" >
+<div id="hmm">
   <div id="modal" />
   <!-- An empty div for shenanagins involving le funny messageAction -->
 </div>
