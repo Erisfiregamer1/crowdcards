@@ -3,7 +3,9 @@
   import { goto } from "$app/navigation";
   import { messageAction } from "svelte-legos";
   import Swal from "sweetalert2";
-  import * as plib from "canvas-particle-network"
+  
+  // Note to self: figure out import for canvas-particle-network
+  
   import { Button } from "$components/ui/button";
   import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "$components/ui/card";
   import { Input } from "$components/ui/input";
@@ -11,7 +13,6 @@
 
   $: title = `CrowdCards - Login (NEW)`;
   
-  var particleCanvas = new plib.ParticleNetwork(document.getElementById('background'), {})
 
   const abortController = new AbortController(); // Used to cancel the Webauthn call we use later
 
