@@ -15,8 +15,15 @@
         navigator.serviceWorker.register("/prompt-sw.js", { scope: "/" }).then((reg) => {
         
           console.log("Service worker loaded, registration is", reg)
+          
+          reg.addEventListener("updatefound", () => {
+    console.log("Service Worker update found!");
+    const b = document.getElementById("status");
+      b.innerHTML = "Installing...";
+  });
     });
 
+        
         let isControlled = Boolean(navigator.serviceWorker.controller);
 
         navigator.serviceWorker.addEventListener("controllerchange", () => {
