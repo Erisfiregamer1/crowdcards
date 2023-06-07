@@ -12,7 +12,7 @@
 
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
-        navigator.serviceWorker.register("/prompt-sw.js", { scope: "/" }).then((reg) => {
+        navigator.serviceWorker.register("/prompt-sw.js").then((reg) => {
         
           console.log("Service worker loaded, registration is", reg)
           
