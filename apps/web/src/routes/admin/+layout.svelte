@@ -3,7 +3,7 @@
   import { onMount } from "svelte";
   import { pwaInfo } from "virtual:pwa-info";
   import { page } from "$app/stores";
-  import Swal from "sweetalert2"
+  import Swal from "sweetalert2";
   import { goto } from "$app/navigation";
 
   let ReloadPrompt;
