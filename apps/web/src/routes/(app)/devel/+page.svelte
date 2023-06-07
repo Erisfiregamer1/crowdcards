@@ -9,6 +9,8 @@
   import { Label } from "$components/ui/label";
 
   $: title = `CrowdCards - Login (NEW)`;
+  
+  var particleCanvas = new ParticleNetwork(document.getElementById('background')
 
   const abortController = new AbortController(); // Used to cancel the Webauthn call we use later
 
@@ -47,7 +49,9 @@
   }
 </script>
 
-<div id="hmm">
+<div id="background"></div>
+
+<div id="hmm" >
   <div id="modal" />
   <!-- An empty div for shenanagins involving le funny messageAction -->
 </div>
