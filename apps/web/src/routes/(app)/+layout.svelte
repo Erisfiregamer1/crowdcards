@@ -11,7 +11,6 @@
     goto(`/${window.location.href.match(new RegExp("(?<=https://.*/).*"))}`);
 
     if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => {
         console.log("a")
         
         navigator.serviceWorker.register("/prompt-sw.js").then((reg) => {
@@ -58,7 +57,6 @@
             isControlled = true;
           }
         });
-      });
     }
 
     window.addEventListener("offline", (e) => {
