@@ -2,7 +2,7 @@
   import "../../app.css";
   import { onMount } from "svelte";
   import { pwaInfo } from "virtual:pwa-info";
-
+  import Swal from "sweetalert2";
   import { page } from "$app/stores";
   import { goto } from "$app/navigation";
 
