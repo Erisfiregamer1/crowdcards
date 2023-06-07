@@ -48,7 +48,7 @@
   
   onMount(async () => {
     var options = {
-    particleColor: '#FFF',
+    particleColor: '#000',
     background: '#222',
     speed: 'medium',
     density: 'medium'
@@ -63,10 +63,10 @@ var particleCanvas = new ParticleNetwork(document.getElementById('background'), 
   <!-- An empty div for shenanagins involving le funny messageAction -->
 </div>
 
-<div class="relative">
-<div id="background" class="-z-50 h-screen w-screen absolute inset-0"></div>
+<!-- The background div (A canvas is added inside on code execution, I can provide the code. Everything below this is content) -->
+<div id="background" class="-z-50 h-screen w-screen"></div>
 
-<Card class="bg-[#222] text-white">
+<Card class="bg-[#222] text-white z-10">
   <CardHeader class="space-y-1">
     <CardTitle class="text-2xl">Login to an account</CardTitle>
     <CardDescription>Choose your login method.</CardDescription>
@@ -109,4 +109,3 @@ var particleCanvas = new ParticleNetwork(document.getElementById('background'), 
     <Button class="w-full" on:click={loginNormally}>Login</Button>
   </CardFooter>
 </Card>
-</div>
