@@ -15,7 +15,7 @@
         navigator.serviceWorker.register("/prompt-sw.js", { scope: "/" }).then((reg) => {
         
           console.log("Service worker loaded, registration is", reg)
-    };
+    });
         
         const registration = await navigator.serviceWorker.getRegistration();
 if (registration) {
