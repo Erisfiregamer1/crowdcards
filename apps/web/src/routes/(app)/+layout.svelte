@@ -16,9 +16,15 @@
           console.log(`New service worker registered, registration is ${reg}`)
           
           if (reg.installing) {
-            console.log("Service worker installing")
+            
+          
+          const b = document.getElementById("status");
+      b.innerHTML = "Installing...";
           } else if (reg.active) {
-            console.log("Service worker active")
+            
+          
+          const b = document.getElementById("status");
+      b.innerHTML = "";
           }
         });
 
@@ -137,6 +143,7 @@
     </div>
   </div>
   <div class="mr-3">
+    <div id="status" aria-label="The installing notice for the site's service worker." />
     <a href="/offline" id="offline" class="mr-3 text-red-800" aria-label="The offline button that appears when the site is disconnected from the internet." />
 
     <a href="/admin" id="admin" aria-label="The admin button." class="mr-1" />
