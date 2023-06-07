@@ -23,6 +23,7 @@
         navigator.serviceWorker.addEventListener("controllerchange", () => {
           if (isControlled) {
             
+            console.log("b")
             
           const b = document.getElementById("status");
       b.innerHTML = "";
@@ -41,8 +42,11 @@
             });
           } else {
             
+            console.log("a")
+            
           const b = document.getElementById("status");
       b.innerHTML = "";
+            
             isControlled = true;
           }
         });
