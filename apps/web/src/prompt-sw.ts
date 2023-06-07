@@ -10,6 +10,8 @@ import {
 import { clientsClaim } from "workbox-core";
 import { NetworkFirst } from "workbox-strategies";
 import { NavigationRoute, registerRoute } from "workbox-routing";
+import { BackgroundSyncPlugin } from 'workbox-background-sync';
+import { ExpirationPlugin } from 'workbox-expiration';
 
 declare let self: ServiceWorkerGlobalScope;
 
