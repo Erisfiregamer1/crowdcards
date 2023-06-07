@@ -14,6 +14,7 @@ const config = {
           "self",
           "https://cdn.jsdelivr.net/npm/eruda",
           "https://jscdn.glitch.me/cdn/authflow.js",
+          "https://unpkg.com/canvas-particle-network",
           "unsafe-inline",
         ],
         "object-src": ["none"],
