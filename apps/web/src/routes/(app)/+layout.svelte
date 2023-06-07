@@ -148,7 +148,7 @@
       <a href="/verified_cards">View Approved Cards</a>
     </div>
   </div>
-  <div class="mr-3">
+  <div class="mr-3 flex">
     <div id="status" aria-label="The installing notice for the site's service worker" />
     <a href="/offline" id="offline" class="mr-3 text-red-800" aria-label="The offline button that appears when the site is disconnected from the internet." />
 
