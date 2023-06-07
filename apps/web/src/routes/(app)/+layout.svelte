@@ -9,7 +9,34 @@
   let ReloadPrompt;
   onMount(async () => {
     goto(`/${window.location.href.match(new RegExp("(?<=https://.*/).*"))}`);
-    pwaInfo && (ReloadPrompt = (await import("$lib/ReloadPrompt.svelte")).default);
+    
+    if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/prompt-sw.js', { scope: '/' })
+      
+      let isControlled = Boolean(navigator.serviceWorker.controller);
+
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (isControlled) {
+      Swal.fire({
+        title: "Refresh required!",
+        text: "New site content has been loaded! To see it, you'll have to refresh the site.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Refresh now",
+        cancelButtonText: "Refresh later",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.reload();
+        }
+      });
+    } else {
+      isControlled = true;
+    }
+  });
+
+    })
+  }
 
     window.addEventListener("offline", (e) => {
       console.log(navigator.onLine, navigator.online);
@@ -116,7 +143,3 @@
 <div class="border-2 border-transparent text-white" id="c">
   <slot />
 </div>
-
-{#if ReloadPrompt}
-  <svelte:component this={ReloadPrompt} />
-{/if}
