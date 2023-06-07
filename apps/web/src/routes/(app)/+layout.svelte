@@ -14,18 +14,8 @@
       window.addEventListener("load", () => {
         navigator.serviceWorker.register("/prompt-sw.js", { scope: "/" }).then((reg) => {
           console.log(`New service worker registered, registration is ${reg}`)
-          
-          if (reg.installing) {
-            
-          
           const b = document.getElementById("status");
       b.innerHTML = "Installing...";
-          } else if (reg.active) {
-            
-          
-          const b = document.getElementById("status");
-      b.innerHTML = "";
-          }
         });
 
         let isControlled = Boolean(navigator.serviceWorker.controller);
@@ -45,6 +35,9 @@
               }
             });
           } else {
+            
+          const b = document.getElementById("status");
+      b.innerHTML = "";
             isControlled = true;
           }
         });
