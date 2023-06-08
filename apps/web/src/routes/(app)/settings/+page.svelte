@@ -16,7 +16,7 @@
       });
     } else if (Notification.permission === "granted") {
       Swal.fire({
-        icon: "alert",
+        icon: "info",
         title: "Already enabled!",
         text: "You already gave us notification permissions. No need to give them to us again!",
       });
