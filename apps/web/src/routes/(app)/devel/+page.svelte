@@ -50,10 +50,7 @@
     var script = document.getElementById('particle-script')
     
     script.addEventListener("load", function (event) {
-      console.log("Script loaded")
-    })
-    
-    var options = {
+          var options = {
     particleColor: '#F2F2F2',
     background: '#222',
     speed: 'high',
@@ -63,6 +60,7 @@
 var particleCanvas = new ParticleNetwork(document.getElementById('background'), options);
     
     document.getElementById("background").style = null
+    })
   })
 </script>
 
