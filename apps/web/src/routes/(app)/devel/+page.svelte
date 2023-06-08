@@ -47,9 +47,6 @@
   }
   
   onMount(async () => {
-    var script = document.getElementById('particle-script')
-    
-    script.addEventListener("load", function (event) {
           var options = {
     particleColor: '#F2F2F2',
     background: '#222',
@@ -60,7 +57,6 @@
 var particleCanvas = new ParticleNetwork(document.getElementById('background'), options);
     
     document.getElementById("background").style = null
-    })
   })
 </script>
 
