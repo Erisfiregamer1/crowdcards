@@ -95,9 +95,8 @@ var particleCanvas = new ParticleNetwork(document.getElementById('background'), 
   <!-- An empty div for shenanagins involving le funny messageAction -->
 </div>
 
-<!-- The background div (A canvas is added inside on code execution, I can provide the code. Everything below this is content) -->
-<div id="a" class="relative overflow-hidden">
-<div id="background" class="h-screen w-screen absolute"></div>
+<div id="a" class="relative overflow-visible">
+<div id="background" class="h-fit	w-fit absolute"></div>
 
 <Card class="bg-transparent	text-white z-[900] relative">
   <CardHeader class="space-y-1">
