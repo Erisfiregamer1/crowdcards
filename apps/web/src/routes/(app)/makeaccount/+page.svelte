@@ -55,6 +55,9 @@ var particleCanvas = new ParticleNetwork(document.getElementById('background'), 
   })
 </script>
 
+<svelte:head>
+  <title>{title}</title>
+</svelte:head>
 
 <div id="hmm">
   <div id="modal" />
@@ -73,12 +76,12 @@ var particleCanvas = new ParticleNetwork(document.getElementById('background'), 
   <CardContent class="grid gap-4">
     <div class="grid grid-cols-2 gap-4">
       <Button variant="outline" class="bg-slate-950" on:click={loginWithGoogle}>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" class="mr-2 h-4 w-4" />
-        <img src="https://authflow.glitch.me/assets/favicon.svg" class="mr-2 h-4 w-4" />
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="The Google logo" class="mr-2 h-4 w-4" />
+        <img src="https://authflow.glitch.me/assets/favicon.svg" alt="The Authflow logo" class="mr-2 h-4 w-4" />
         Google (Via Authflow)
       </Button>
       <Button variant="outline" class="bg-slate-950" on:click={loginWithErisWS}>
-        <img class="mr-2 h-4 w-4" />
+        <img class="mr-2 h-4 w-4" alt="The empty ErisWS logo"/>
 
         ErisWS
       </Button>
