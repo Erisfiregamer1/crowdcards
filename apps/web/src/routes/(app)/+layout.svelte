@@ -155,7 +155,7 @@
     </div>
   </div>
   <div class="mr-3 flex">
-    <div id="status" aria-label="The installing notice for the site's service worker"></div>
+    <div id="status" aria-label="The installing prompt for the site's service worker."></div>
     <a href="/offline" id="offline" class="mr-2 ml-2 text-red-800" aria-label="The offline button that appears when the site is disconnected from the internet." />
 
     <a href="/login" id="login-btn"> Login </a>
