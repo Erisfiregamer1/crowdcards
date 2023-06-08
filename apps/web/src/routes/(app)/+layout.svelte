@@ -155,8 +155,8 @@
     </div>
   </div>
   <div class="mr-3 flex">
-    <div id="status" role="alert" aria-label="The installing notice for this site's service worker."></div>
-    <a href="/offline" role="alert" id="offline" class="mr-2 ml-2 text-red-800" aria-label="The offline button that appears when the site is disconnected from the internet." />
+    <div id="status" role="status" aria-label="The installing notice for this site's service worker."></div>
+    <a href="/offline" role="status" id="offline" class="mr-2 ml-2 text-red-800" aria-label="The offline button that appears when the site is disconnected from the internet." />
 
     <a href="/login" id="login-btn"> Login </a>
     <a href="/settings"><img class="ml-[20px] inline-block h-auto w-[1.5rem]" src="https://cdn.glitch.global/3de90402-af4c-426a-b746-6b7cb6f31203/139-1393405_file-gear-icon-svg-wikimedia-commons-gear-icon-removebg-preview.png" alt="Settings" /></a>
