@@ -42,6 +42,31 @@
     newElement.click();
   }
   onMount(async () => {
+    const check = document.getElementById("particle-funny")
+    
+    if (!check) {
+    
+    const script = document.createElement('script');
+    script.src = 'https://unpkg.com/canvas-particle-network';
+    script.id = "particle-funny"
+    script.defer = true;
+    script.onload = function () {
+         
+          var options = {
+    particleColor: '#F2F2F2',
+    background: '#222',
+    speed: 'high',
+    density: 'medium',
+      interactive: false
+};
+var particleCanvas = new ParticleNetwork(document.getElementById('background'), options);
+    
+    document.getElementById("background").style = null 
+    }
+    
+        document.head.appendChild(script);
+  
+  } else {
     var options = {
     particleColor: '#F2F2F2',
     background: '#222',
@@ -52,6 +77,7 @@
 var particleCanvas = new ParticleNetwork(document.getElementById('background'), options);
     
     document.getElementById("background").style = null
+  }
   })
 </script>
 
