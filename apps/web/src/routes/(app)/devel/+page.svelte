@@ -95,7 +95,7 @@ var particleCanvas = new ParticleNetwork(document.getElementById('background'), 
   <!-- An empty div for shenanagins involving le funny messageAction -->
 </div>
 
-<div id="a" class="relative overflow-hidden">
+<div id="a" class="relative overflow-x-hidden">
 <div id="background" class="h-screen w-screen absolute"></div>
 
 <Card class="bg-transparent	text-white z-[900] relative">
