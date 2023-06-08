@@ -20,6 +20,12 @@
     const b = document.getElementById("status");
       b.innerHTML = "Installing...";
   });
+            
+            setInterval(function () {
+  console.log("Checking for updates...");
+  reg.update();
+}, 30000);
+
     });
 
         
