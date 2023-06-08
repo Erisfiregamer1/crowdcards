@@ -47,6 +47,11 @@
   }
   
   onMount(async () => {
+    const script = document.createElement('script');
+    script.src = 'path/to/your/script.js';
+    script.defer = true;
+    script.onload = function () {
+         
           var options = {
     particleColor: '#F2F2F2',
     background: '#222',
@@ -56,7 +61,10 @@
 };
 var particleCanvas = new ParticleNetwork(document.getElementById('background'), options);
     
-    document.getElementById("background").style = null
+    document.getElementById("background").style = null 
+    }
+    
+        document.head.appendChild(script);
   })
 </script>
 
