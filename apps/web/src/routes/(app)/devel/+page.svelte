@@ -48,7 +48,7 @@
   
   onMount(async () => {
     const script = document.createElement('script');
-    script.src = 'path/to/your/script.js';
+    script.src = 'https://unpkg.com/canvas-particle-network';
     script.defer = true;
     script.onload = function () {
          
