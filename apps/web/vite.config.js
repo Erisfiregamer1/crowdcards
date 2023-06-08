@@ -37,7 +37,7 @@ const config = {
         lang: 'en',
         scope: '/',
         description: 'CrowdCards is a TCG where everyone makes a card.',
-        theme_color: '#333333',
+        theme_color: '#222222',
         icons: [
           {
             src: '/cclogo.png',
