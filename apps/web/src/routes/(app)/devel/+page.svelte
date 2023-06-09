@@ -21,7 +21,7 @@
   }
 
   function loginNormally() {
-    showMessage("info", "This option is not implemented!");
+    
   }
 
   function loginWithErisWS() {
