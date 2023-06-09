@@ -36,18 +36,17 @@
         })
         .then((uuid) => {
           if (uuid.startsWith("002")) {
-            Swal.fire({
-              icon: "warning",
-              title: "Error!",
-              text: `Something went wrong. The error returned was ${uuid}.`,
-              confirmButtonText: "Darn it",
-            });
+            if (uuid === "002-0002") {
+              showMessage("error", "This account already exists!");
+            } else {
+              showMessage("error", "Something went wrong!");
+            }
           } else {
             Swal.fire({
               icon: "success",
-              title: "Success!",
+              title: "Welcome!",
               text: `Your account was created! It's UUID is ${uuid}.`,
-              confirmButtonText: "Awesome!",
+              confirmButtonText: ":D",
               showDenyButton: true,
               denyButtonText: "Log into new account",
             }).then((result) => {
@@ -82,7 +81,7 @@
                           icon: "error",
                           title: "Banned!",
                           text: "This account has been banned from CrowdCards. This should NOT have happened, contact the developers to get your account unbanned.",
-                          confirmButtonText: "Aw, man!",
+                          confirmButtonText: "D:",
                         });
                       } else {
                         return response.text();
@@ -102,12 +101,7 @@
                       }
                       // If no UUID is returned, display an error message
                       else {
-                        Swal.fire({
-                          icon: "warning",
-                          title: "Error!",
-                          text: "Invalid username or password. This shouldn't have happened, please contact the developers.",
-                          confirmButtonText: ":(",
-                        });
+                        showMessage("error", "Invalid username / password! Please contact the developers.");
                       }
                     });
                 } else {
