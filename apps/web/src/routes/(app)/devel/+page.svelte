@@ -382,7 +382,7 @@
 </div>
 
 <div id="a" class="relative overflow-hidden">
-  <div id="background" class="absolute h-screen w-screen" />
+  <div id="background" class="absolute h-max w-max" />
 
   <Card class="relative	z-[900] bg-transparent text-white">
     <CardHeader class="space-y-1">
