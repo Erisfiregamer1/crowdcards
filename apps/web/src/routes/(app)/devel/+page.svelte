@@ -16,7 +16,7 @@
   const verifyRegisterEndpoint = "https://crowdcards-api.glitch.me/webauthn/register/verify";
   const authenticateEndpoint = "https://crowdcards-api.glitch.me/webauthn/authenticate";
   const verifyAuthenticateEndpoint = "https://crowdcards-api.glitch.me/webauthn/authenticate/verify";
-  
+
   function arrayBufferToBase64Url(arrayBuffer) {
     const byteArray = new Uint8Array(arrayBuffer);
     const base64 = btoa(String.fromCharCode.apply(null, byteArray));
