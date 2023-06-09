@@ -156,6 +156,6 @@
 
 <br />
 
-<div class="border-2 border-transparent text-white" id="c">
+<div class="border-2 border-transparent text-white h-screen w-screen" id="c">
   <slot />
 </div>
