@@ -193,18 +193,14 @@
         })
         .then((uuid) => {
           if (uuid.startsWith("002")) {
-            Swal.fire({
-              icon: "warning",
-              title: "Error!",
-              text: `Something went wrong. The error returned was ${uuid}.`,
-              confirmButtonText: "Darn it",
-            });
+            console.error(uuid)
+            showMessage("error", "Something went wrong! A user may already exist with this username...");
           } else {
             Swal.fire({
               icon: "success",
-              title: "Success!",
+              title: "Welcome!",
               text: `Your account was created! It's UUID is ${uuid}.`,
-              confirmButtonText: "Awesome!",
+              confirmButtonText: ":D",
               showDenyButton: true,
               denyButtonText: "Log into new account",
             }).then((result) => {
@@ -226,21 +222,13 @@
                     .then((response) => {
                       // If the response status is 400 (Bad Request), display an error message
                       if (response.status === 400) {
-                        Swal.fire({
-                          icon: "warning",
-                          title: "Error!",
-                          text: "Invalid username or password. This shouldn't have happened, please contact the developers.",
-                          confirmButtonText: ":(",
-                        });
+                        console.error("CRITICAL:", response)
+                        showMessage("error", "Something went seriously wrong, check devtools and report this to the developers!");
                       }
                       // Otherwise, return the response as text (the session token)
                       else if (response.status === 403) {
-                        Swal.fire({
-                          icon: "error",
-                          title: "Banned!",
-                          text: "This account has been banned from CrowdCards. This should NOT have happened, contact the developers to get your account unbanned.",
-                          confirmButtonText: "Aw, man!",
-                        });
+                        console.error("CRITICAL:", response)
+                        showMessage("error", "Your account is banned! Something has gone, check devtools and report this to the developers!");
                       } else {
                         return response.text();
                       }
