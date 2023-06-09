@@ -55,12 +55,7 @@
               .then((response) => {
                 // If the response status is 400 (Bad Request), display an error message
                 if (response.status === 400) {
-                  Swal.fire({
-                    icon: "warning",
-                    title: "Error!",
-                    text: "Invalid username or password.",
-                    confirmButtonText: "Whoops",
-                  });
+                  showMessage("error", "Invalid username / password!");
                 }
                 // Otherwise, return the response as text (the session token)
                 else if (response.status === 403) {
@@ -94,18 +89,12 @@
                 }
                 // If no UUID is returned, display an error message
                 else {
-                  Swal.fire({
-                    icon: "warning",
-                    title: "Error!",
-                    text: "Invalid username or password.",
-                    confirmButtonText: "Whoops",
-                  });
+                  showMessage("error", "Invalid username / password!");
                 }
               });
           } else {
-            Swal.fire({
-              icon: "error",
-              title: "Error!",
+            .fire({
+     error    Invalid username / password!itl: "Error!",
               text: "Invalid username or password.",
               confirmButtonText: "Whoops",
             });
