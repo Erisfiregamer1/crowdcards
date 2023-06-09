@@ -17,8 +17,136 @@
   const authenticateEndpoint = "https://crowdcards-api.glitch.me/webauthn/authenticate";
   const verifyAuthenticateEndpoint = "https://crowdcards-api.glitch.me/webauthn/authenticate/verify";
 
+  function arrayBufferToBase64Url(arrayBuffer) {
+    const byteArray = new Uint8Array(arrayBuffer);
+    const base64 = btoa(String.fromCharCode.apply(null, byteArray));
+    return base64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  }
+
+  function base64UrlToArrayBuffer(base64Url) {
+    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    const binaryString = atob(base64);
+    const len = binaryString.length;
+    const bytes = new Uint8Array(len);
+
+    for (let i = 0; i < len; i++) {
+      bytes[i] = binaryString.charCodeAt(i);
+    }
+
+    return bytes.buffer;
+  }
+
+  function base64UrlToUint8Array(base64Url) {
+    const padding = "=".repeat((4 - (base64Url.length % 4)) % 4);
+    const base64 = (base64Url + padding).replace(/-/g, "+").replace(/_/g, "/");
+
+    const rawData = atob(base64);
+    const outputArray = new Uint8Array(rawData.length);
+
+    for (let i = 0; i < rawData.length; ++i) {
+      outputArray[i] = rawData.charCodeAt(i);
+    }
+    return outputArray;
+  }
+
   function loginWithWebauthn() {
-    showMessage("info", "This option is not implemented!");
+    let hasShownError = false;
+
+    abortController.abort(); // Stop Conditional UI so we can authenticate error-less
+
+    try {
+      let userUUID2 = await fetch("https://crowdcards-api.glitch.me/api/getUUID", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: document.getElementById("login-username").value,
+          usertype: 1,
+        }),
+      });
+
+      let userUUID = await userUUID2.text();
+
+      console.log(userUUID);
+
+      const response = await fetch(authenticateEndpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userUUID }),
+      });
+      const opts = await response.text();
+
+      console.log(opts);
+
+      const options = JSON.parse(opts);
+
+      console.log(JSON.stringify(options.allowCredentials) === JSON.stringify([]));
+
+      options.challenge = base64UrlToUint8Array(options.challenge);
+
+      if (JSON.stringify(options.allowCredentials) === JSON.stringify([]) && userUUID !== "") {
+        showMessage("error", "Passwordless not registered!");
+
+        hasShownError = true;
+
+        throw "Atempted to auth as non-passwordless user";
+      } else if (JSON.stringify(options.allowCredentials) === JSON.stringify([]) && userUUID === "") {
+        showMessage("error", "No passwordless accounts available!");
+
+        hasShownError = true;
+
+        throw "Nobody is passwordless :skull:";
+      }
+
+      options.allowCredentials = options.allowCredentials.map((credential) => {
+        return {
+          ...credential,
+          id: base64UrlToArrayBuffer(credential.id),
+        };
+      });
+
+      // Use web browser's WebAuthn support for authentication
+      const credential = await navigator.credentials.get({ publicKey: options });
+
+      console.log(credential);
+
+      const attestationResponse = {
+        rawId: arrayBufferToBase64Url(credential.rawId),
+        id: credential.id,
+        type: credential.type,
+        response: {
+          authenticatorData: arrayBufferToBase64Url(credential.response.authenticatorData) + "=",
+          signature: arrayBufferToBase64Url(credential.response.signature) + "=",
+          clientDataJSON: arrayBufferToBase64Url(credential.response.clientDataJSON),
+        },
+      };
+
+      // Send the authentication result to the server
+      const authResult = await fetch(verifyAuthenticateEndpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userUUID, attestationResponse }),
+      });
+
+      const resp = await authResult.json();
+      const authToken = resp.res.session;
+      const uuid = resp.res.uuid;
+
+      localStorage.setItem("sessionToken", authToken);
+      localStorage.setItem("uuid", uuid);
+      document.getElementById("login-btn").innerHTML = "Profile";
+      document.getElementById("login-btn").href = "/profile";
+      showMessage("success", "Successfully logged in!");
+      // Display filler page while logged in
+      goto("/");
+    } catch (error) {
+      console.error("Error during authentication:", error);
+
+      if (hasShownError === false) {
+        showMessage("error", "Authentication failed!");
+      }
+    }
   }
 
   function loginWithGoogle() {
