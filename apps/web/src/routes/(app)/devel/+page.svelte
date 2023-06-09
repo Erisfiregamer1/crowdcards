@@ -7,9 +7,9 @@
   import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "$components/ui/card";
   import { Input } from "$components/ui/input";
   import { Label } from "$components/ui/label";
-
+  
   $: title = `CrowdCards - Login (NEW)`;
-
+  
   const abortController = new AbortController(); // Used to cancel the Webauthn call we use later
 
   function loginWithWebauthn() {
@@ -22,80 +22,81 @@
 
   function loginNormally() {
     const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
+      const password = document.getElementById("password").value;
 
-    // Make a GET request to the /api/getUUID endpoint to retrieve the user's UUID
-    fetch("https://crowdcards-api.glitch.me/api/getUUID", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: username,
-        usertype: 1,
-      }),
-    })
-      .then((response) => {
-        return response.text();
+      // Make a GET request to the /api/getUUID endpoint to retrieve the user's UUID
+      fetch("https://crowdcards-api.glitch.me/api/getUUID", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: username,
+          usertype: 1,
+        }),
       })
-      .then((uuid) => {
-        // If UUID is returned, make a POST request to the /api/startSession endpoint to start a new session
-        if (uuid) {
-          fetch("https://crowdcards-api.glitch.me/api/startSession", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              UUID: uuid,
-              password: password,
-              logintype: 1,
-            }),
-          })
-            .then((response) => {
-              // If the response status is 400 (Bad Request), display an error message
-              if (response.status === 400) {
-                showMessage("error", "Invalid username / password!");
-              }
-              // Otherwise, return the response as text (the session token)
-              else if (response.status === 403) {
-                Swal.fire({
-                  icon: "error",
-                  title: "Banned!",
-                  text: "This account has been banned from CrowdCards. See the TOS for more information.",
-                  showCancelButton: true,
-                  confirmButtonText: "Aw, man!",
-                  cancelButtonText: "Open TOS",
-                }).then((result) => {
-                  /* Read more about isConfirmed, isDenied below */
-                  if (result.isDenied) {
-                    window.location.href = "https://cdn.glitch.global/d24a8d52-d1f8-43e5-a4b9-2b8939c0a945/CrowdCards%20TOS%20planning.pdf?v=1675547587832";
-                  }
-                });
-              } else {
-                return response.text();
-              }
+        .then((response) => {
+          return response.text();
+        })
+        .then((uuid) => {
+          // If UUID is returned, make a POST request to the /api/startSession endpoint to start a new session
+          if (uuid) {
+            fetch("https://crowdcards-api.glitch.me/api/startSession", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                UUID: uuid,
+                password: password,
+                logintype: 1,
+              }),
             })
-            .then((sessionToken) => {
-              // If session token is returned, store it in local storage along with the user's UUID
-              if (sessionToken) {
-                localStorage.setItem("uuid", uuid);
-                localStorage.setItem("sessionToken", sessionToken);
+              .then((response) => {
+                // If the response status is 400 (Bad Request), display an error message
+                if (response.status === 400) {
+                  showMessage("error", "Invalid username / password!");
+                }
+                // Otherwise, return the response as text (the session token)
+                else if (response.status === 403) {
+                  Swal.fire({
+                    icon: "error",
+                    title: "Banned!",
+                    text: "This account has been banned from CrowdCards. See the TOS for more information.",
+                    showCancelButton: true,
+                    confirmButtonText: "Aw, man!",
+                    cancelButtonText: "Open TOS",
+                  }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isDenied) {
+                      window.location.href = "https://cdn.glitch.global/d24a8d52-d1f8-43e5-a4b9-2b8939c0a945/CrowdCards%20TOS%20planning.pdf?v=1675547587832";
+                    }
+                  });
+                } else {
+                  return response.text();
+                }
+              })
+              .then((sessionToken) => {
+                // If session token is returned, store it in local storage along with the user's UUID
+                if (sessionToken) {
+                  localStorage.setItem("uuid", uuid);
+                  localStorage.setItem("sessionToken", sessionToken);
 
-                document.getElementById("login-btn").innerHTML = "Profile";
-                document.getElementById("login-btn").href = "/profile";
-                // Display filler page while logged in
-                goto("/");
-              }
-              // If no UUID is returned, display an error message
-              else {
-                showMessage("error", "Invalid username / password!");
-              }
-            });
-        } else {
-          showMessage("error", "Invalid username / password!");
-        }
-      });
+                  document.getElementById("login-btn").innerHTML = "Profile";
+                  document.getElementById("login-btn").href = "/profile";
+                  showMessage("success", "Successfully logged in!");
+                  // Display filler page while logged in
+                  goto("/");
+                }
+                // If no UUID is returned, display an error message
+                else {
+                  showMessage("error", "Invalid username / password!");
+                }
+              });
+          } else {
+            showMessage("error", "Invalid username / password!");
+          }
+        });
   }
 
   function loginWithErisWS() {
@@ -119,42 +120,45 @@
 
     newElement.click();
   }
-
+  
   onMount(async () => {
-    const check = document.getElementById("particle-funny");
-
+    const check = document.getElementById("particle-funny")
+    
     if (!check) {
-      const script = document.createElement("script");
-      script.src = "https://unpkg.com/canvas-particle-network";
-      script.id = "particle-funny";
-      script.defer = true;
-      script.onload = function () {
-        var options = {
-          particleColor: "#F2F2F2",
-          background: "#222",
-          speed: "high",
-          density: "medium",
-          interactive: false,
-        };
-        var particleCanvas = new ParticleNetwork(document.getElementById("background"), options);
-
-        document.getElementById("background").style = null;
-      };
-
-      document.head.appendChild(script);
-    } else {
-      var options = {
-        particleColor: "#F2F2F2",
-        background: "#222",
-        speed: "high",
-        density: "medium",
-        interactive: false,
-      };
-      var particleCanvas = new ParticleNetwork(document.getElementById("background"), options);
-
-      document.getElementById("background").style = null;
+    
+    const script = document.createElement('script');
+    script.src = 'https://unpkg.com/canvas-particle-network';
+    script.id = "particle-funny"
+    script.defer = true;
+    script.onload = function () {
+         
+          var options = {
+    particleColor: '#F2F2F2',
+    background: '#222',
+    speed: 'high',
+    density: 'medium',
+      interactive: false
+};
+var particleCanvas = new ParticleNetwork(document.getElementById('background'), options);
+    
+    document.getElementById("background").style = null 
     }
-  });
+    
+        document.head.appendChild(script);
+  
+  } else {
+    var options = {
+    particleColor: '#F2F2F2',
+    background: '#222',
+    speed: 'high',
+    density: 'medium',
+      interactive: false
+};
+var particleCanvas = new ParticleNetwork(document.getElementById('background'), options);
+    
+    document.getElementById("background").style = null
+  }
+  })
 </script>
 
 <svelte:head>
@@ -167,49 +171,49 @@
 </div>
 
 <div id="a" class="relative overflow-x-hidden">
-  <div id="background" class="absolute h-screen w-screen" />
+<div id="background" class="h-screen w-screen absolute"></div>
 
-  <Card class="relative	z-[900] bg-transparent text-white">
-    <CardHeader class="space-y-1">
-      <CardTitle class="text-2xl">Login to an account</CardTitle>
-      <CardDescription>Choose your login method.</CardDescription>
-    </CardHeader>
-    <CardContent class="grid gap-4">
-      <div class="grid grid-cols-3 gap-4">
-        <Button variant="outline" class="bg-slate-950" on:click={loginWithGoogle}>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="The Google logo" class="mr-2 h-4 w-4" />
-          <img src="https://authflow.glitch.me/assets/favicon.svg" alt="The Authflow logo" class="mr-2 h-4 w-4" />
-          Google (Via Authflow)
-        </Button>
-        <Button variant="outline" class="bg-slate-950" on:click={loginWithWebauthn}>Passwordless via Webauthn</Button>
-        <Button variant="outline" class="bg-slate-950" on:click={loginWithErisWS}>
-          <img class="mr-2 h-4 w-4" alt="The empty ErisWS logo" />
+<Card class="bg-transparent	text-white z-[900] relative">
+  <CardHeader class="space-y-1">
+    <CardTitle class="text-2xl">Login to an account</CardTitle>
+    <CardDescription>Choose your login method.</CardDescription>
+  </CardHeader>
+  <CardContent class="grid gap-4">
+    <div class="grid grid-cols-3 gap-4">
+      <Button variant="outline" class="bg-slate-950" on:click={loginWithGoogle}>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="The Google logo" class="mr-2 h-4 w-4" />
+        <img src="https://authflow.glitch.me/assets/favicon.svg" alt="The Authflow logo" class="mr-2 h-4 w-4" />
+        Google (Via Authflow)
+      </Button>
+      <Button variant="outline" class="bg-slate-950" on:click={loginWithWebauthn}>Passwordless via Webauthn</Button>
+      <Button variant="outline" class="bg-slate-950" on:click={loginWithErisWS}>
+        <img class="mr-2 h-4 w-4" alt="The empty ErisWS logo"/>
 
-          ErisWS
-        </Button>
-      </div>
+        ErisWS
+      </Button>
+    </div>
 
-      <Button variant="outline" class="bg-slate-950" on:click={switchToCreateAccount}>Switch to creating account</Button>
+    <Button variant="outline" class="bg-slate-950" on:click={switchToCreateAccount}>Switch to creating account</Button>
 
-      <div class="relative">
-        <div class="absolute inset-0 flex items-center">
-          <span class="w-full border-t" />
-        </div>
-        <div class="relative flex justify-center text-xs uppercase">
-          <span class="text-muted-foreground bg-[#222] px-2 text-white"> Or continue with </span>
-        </div>
+    <div class="relative">
+      <div class="absolute inset-0 flex items-center">
+        <span class="w-full border-t" />
       </div>
-      <div class="grid gap-2">
-        <Label for="username">Username</Label>
-        <Input id="username" type="username" class="bg-[#222]" />
+      <div class="relative flex justify-center text-xs uppercase">
+        <span class="text-muted-foreground bg-[#222] px-2 text-white"> Or continue with </span>
       </div>
-      <div class="grid gap-2">
-        <Label for="password">Password</Label>
-        <Input id="password" type="password" class="bg-[#222]" />
-      </div>
-    </CardContent>
-    <CardFooter>
-      <Button class="w-full" on:click={loginNormally}>Login</Button>
-    </CardFooter>
-  </Card>
+    </div>
+    <div class="grid gap-2">
+      <Label for="username">Username</Label>
+      <Input id="username" type="username" class="bg-[#222]"/>
+    </div>
+    <div class="grid gap-2">
+      <Label for="password">Password</Label>
+      <Input id="password" type="password" class="bg-[#222]"/>
+    </div>
+  </CardContent>
+  <CardFooter>
+    <Button class="w-full" on:click={loginNormally}>Login</Button>
+  </CardFooter>
+</Card>
 </div>
