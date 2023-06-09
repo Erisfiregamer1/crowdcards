@@ -42,43 +42,40 @@
     newElement.click();
   }
   onMount(async () => {
-    const check = document.getElementById("particle-funny")
-    
+    const check = document.getElementById("particle-funny");
+
     if (!check) {
-    
-    const script = document.createElement('script');
-    script.src = 'https://unpkg.com/canvas-particle-network';
-    script.id = "particle-funny"
-    script.defer = true;
-    script.onload = function () {
-         
-          var options = {
-    particleColor: '#F2F2F2',
-    background: '#222',
-    speed: 'high',
-    density: 'medium',
-      interactive: false
-};
-var particleCanvas = new ParticleNetwork(document.getElementById('background'), options);
-    
-    document.getElementById("background").style = null 
+      const script = document.createElement("script");
+      script.src = "https://unpkg.com/canvas-particle-network";
+      script.id = "particle-funny";
+      script.defer = true;
+      script.onload = function () {
+        var options = {
+          particleColor: "#F2F2F2",
+          background: "#222",
+          speed: "high",
+          density: "medium",
+          interactive: false,
+        };
+        var particleCanvas = new ParticleNetwork(document.getElementById("background"), options);
+
+        document.getElementById("background").style = null;
+      };
+
+      document.head.appendChild(script);
+    } else {
+      var options = {
+        particleColor: "#F2F2F2",
+        background: "#222",
+        speed: "high",
+        density: "medium",
+        interactive: false,
+      };
+      var particleCanvas = new ParticleNetwork(document.getElementById("background"), options);
+
+      document.getElementById("background").style = null;
     }
-    
-        document.head.appendChild(script);
-  
-  } else {
-    var options = {
-    particleColor: '#F2F2F2',
-    background: '#222',
-    speed: 'high',
-    density: 'medium',
-      interactive: false
-};
-var particleCanvas = new ParticleNetwork(document.getElementById('background'), options);
-    
-    document.getElementById("background").style = null
-  }
-  })
+  });
 </script>
 
 <svelte:head>
@@ -92,48 +89,48 @@ var particleCanvas = new ParticleNetwork(document.getElementById('background'), 
 
 <!-- The background div (A canvas is added inside on code execution, I can provide the code. Everything below this is content) -->
 <div id="a" class="relative overflow-hidden">
-<div id="background" class="h-screen w-screen absolute"></div>
+  <div id="background" class="absolute h-screen w-screen" />
 
-<Card class="bg-transparent	text-white z-[900] relative">
-  <CardHeader class="space-y-1">
-    <CardTitle class="text-2xl">Create an account</CardTitle>
-    <CardDescription>Choose your account creation method.</CardDescription>
-  </CardHeader>
-  <CardContent class="grid gap-4">
-    <div class="grid grid-cols-2 gap-4">
-      <Button variant="outline" class="bg-slate-950" on:click={loginWithGoogle}>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="The Google logo" class="mr-2 h-4 w-4" />
-        <img src="https://authflow.glitch.me/assets/favicon.svg" alt="The Authflow logo" class="mr-2 h-4 w-4" />
-        Google (Via Authflow)
-      </Button>
-      <Button variant="outline" class="bg-slate-950" on:click={loginWithErisWS}>
-        <img class="mr-2 h-4 w-4" alt="The empty ErisWS logo"/>
+  <Card class="relative	z-[900] bg-transparent text-white">
+    <CardHeader class="space-y-1">
+      <CardTitle class="text-2xl">Create an account</CardTitle>
+      <CardDescription>Choose your account creation method.</CardDescription>
+    </CardHeader>
+    <CardContent class="grid gap-4">
+      <div class="grid grid-cols-2 gap-4">
+        <Button variant="outline" class="bg-slate-950" on:click={loginWithGoogle}>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="The Google logo" class="mr-2 h-4 w-4" />
+          <img src="https://authflow.glitch.me/assets/favicon.svg" alt="The Authflow logo" class="mr-2 h-4 w-4" />
+          Google (Via Authflow)
+        </Button>
+        <Button variant="outline" class="bg-slate-950" on:click={loginWithErisWS}>
+          <img class="mr-2 h-4 w-4" alt="The empty ErisWS logo" />
 
-        ErisWS
-      </Button>
-    </div>
-
-    <Button variant="outline" class="bg-slate-950" on:click={switchToLogIn}>Switch to logging in</Button>
-
-    <div class="relative">
-      <div class="absolute inset-0 flex items-center">
-        <span class="w-full border-t" />
+          ErisWS
+        </Button>
       </div>
-      <div class="relative flex justify-center text-xs uppercase">
-        <span class="text-muted-foreground bg-[#222] px-2 text-white"> Or continue with </span>
+
+      <Button variant="outline" class="bg-slate-950" on:click={switchToLogIn}>Switch to logging in</Button>
+
+      <div class="relative">
+        <div class="absolute inset-0 flex items-center">
+          <span class="w-full border-t" />
+        </div>
+        <div class="relative flex justify-center text-xs uppercase">
+          <span class="text-muted-foreground bg-[#222] px-2 text-white"> Or continue with </span>
+        </div>
       </div>
-    </div>
-<div class="grid gap-2">
-      <Label for="username">Username</Label>
-      <Input id="username" type="username" class="bg-[#222]"/>
-    </div>
-    <div class="grid gap-2">
-      <Label for="password">Password</Label>
-      <Input id="password" type="password" class="bg-[#222]"/>
-    </div>
-  </CardContent>
-  <CardFooter>
-    <Button class="w-full" on:click={loginNormally}>Create Account</Button>
-  </CardFooter>
-</Card>
-  </div>
+      <div class="grid gap-2">
+        <Label for="username">Username</Label>
+        <Input id="username" type="username" class="bg-[#222]" />
+      </div>
+      <div class="grid gap-2">
+        <Label for="password">Password</Label>
+        <Input id="password" type="password" class="bg-[#222]" />
+      </div>
+    </CardContent>
+    <CardFooter>
+      <Button class="w-full" on:click={loginNormally}>Create Account</Button>
+    </CardFooter>
+  </Card>
+</div>

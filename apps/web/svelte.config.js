@@ -1,6 +1,6 @@
 import adapter from "svelte-adapter-deno";
 import preprocess from "svelte-preprocess";
-import { importAssets } from 'svelte-preprocess-import-assets'
+import { importAssets } from "svelte-preprocess-import-assets";
 // you don't need to do this if you're using generateSW strategy in your app
 const generateSW = false;
 /** @type {import('@sveltejs/kit').Config}*/

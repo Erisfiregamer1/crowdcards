@@ -11,56 +11,51 @@
     goto(`/${window.location.href.match(new RegExp("(?<=https://.*/).*"))}`);
 
     if ("serviceWorker" in navigator) {
-          navigator.serviceWorker.register("/prompt-sw.js").then((reg) => {
-        
-          console.log("Service worker registered / loaded, registration is", reg)
-          
-          reg.addEventListener("updatefound", () => {
-    console.log("Service Worker update found!");
-    const b = document.getElementById("status");
-      b.innerHTML = "Installing...";
-  });
-            
-            setInterval(function () {
-  console.log("Checking for updates...");
-  reg.update();
-}, 30000);
+      navigator.serviceWorker.register("/prompt-sw.js").then((reg) => {
+        console.log("Service worker registered / loaded, registration is", reg);
 
-    });
-
-        
-        let isControlled = Boolean(navigator.serviceWorker.controller);
-
-        navigator.serviceWorker.addEventListener("controllerchange", () => {
-          if (isControlled) {
-            
-            console.log("b")
-            
+        reg.addEventListener("updatefound", () => {
+          console.log("Service Worker update found!");
           const b = document.getElementById("status");
-      b.innerHTML = "";
-
-            Swal.fire({
-              title: "Refresh required!",
-              text: "New site content has been loaded! To see it, you'll have to refresh the site.",
-              icon: "warning",
-              showCancelButton: true,
-              confirmButtonText: "Refresh now",
-              cancelButtonText: "Refresh later",
-            }).then((result) => {
-              if (result.isConfirmed) {
-                window.location.reload();
-              }
-            });
-          } else {
-            
-            console.log("a")
-            
-          const b = document.getElementById("status");
-      b.innerHTML = "";
-            
-            isControlled = true;
-          }
+          b.innerHTML = "Installing...";
         });
+
+        setInterval(function () {
+          console.log("Checking for updates...");
+          reg.update();
+        }, 30000);
+      });
+
+      let isControlled = Boolean(navigator.serviceWorker.controller);
+
+      navigator.serviceWorker.addEventListener("controllerchange", () => {
+        if (isControlled) {
+          console.log("b");
+
+          const b = document.getElementById("status");
+          b.innerHTML = "";
+
+          Swal.fire({
+            title: "Refresh required!",
+            text: "New site content has been loaded! To see it, you'll have to refresh the site.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Refresh now",
+            cancelButtonText: "Refresh later",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.reload();
+            }
+          });
+        } else {
+          console.log("a");
+
+          const b = document.getElementById("status");
+          b.innerHTML = "";
+
+          isControlled = true;
+        }
+      });
     }
 
     window.addEventListener("offline", (e) => {
@@ -155,8 +150,8 @@
     </div>
   </div>
   <div class="mr-3 flex">
-    <div id="status" role="status" aria-label="The installing notice for this site's service worker."></div>
-    <a href="/offline" role="status" id="offline" class="mr-2 ml-2 text-red-800" aria-label="The offline button that appears when the site is disconnected from the internet." />
+    <div id="status" role="status" aria-label="The installing notice for this site's service worker." />
+    <a href="/offline" role="status" id="offline" class="ml-2 mr-2 text-red-800" aria-label="The offline button that appears when the site is disconnected from the internet." />
 
     <a href="/login" id="login-btn"> Login </a>
     <a href="/settings"><img class="ml-[20px] inline-block h-auto w-[1.5rem]" src="https://cdn.glitch.global/3de90402-af4c-426a-b746-6b7cb6f31203/139-1393405_file-gear-icon-svg-wikimedia-commons-gear-icon-removebg-preview.png" alt="Settings" /></a>
