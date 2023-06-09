@@ -26,6 +26,7 @@
     "node": ">=16.x"
   },
   "dependencies": {
-    "sweetalert": "^2.1.2"
+    "sweetalert": "^2.1.2",
+    "svelte-preprocess-import-assets": "^1.0.0"
   }
 }
