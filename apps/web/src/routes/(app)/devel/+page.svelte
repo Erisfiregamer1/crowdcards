@@ -381,7 +381,7 @@
   <!-- An empty div for shenanagins involving le funny messageAction -->
 </div>
 
-<div id="a" class="relative overflow-x-hidden">
+<div id="a" class="relative overflow-hidden">
   <div id="background" class="absolute h-screen w-screen" />
 
   <Card class="relative	z-[900] bg-transparent text-white">
