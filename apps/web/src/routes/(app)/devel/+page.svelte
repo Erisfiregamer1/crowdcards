@@ -21,7 +21,96 @@
   }
 
   function loginNormally() {
-    
+    const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      // Make a GET request to the /api/getUUID endpoint to retrieve the user's UUID
+      fetch("https://crowdcards-api.glitch.me/api/getUUID", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: username,
+          usertype: 1,
+        }),
+      })
+        .then((response) => {
+          return response.text();
+        })
+        .then((uuid) => {
+          // If UUID is returned, make a POST request to the /api/startSession endpoint to start a new session
+          if (uuid) {
+            fetch("https://crowdcards-api.glitch.me/api/startSession", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                UUID: uuid,
+                password: password,
+                logintype: 1,
+              }),
+            })
+              .then((response) => {
+                // If the response status is 400 (Bad Request), display an error message
+                if (response.status === 400) {
+                  Swal.fire({
+                    icon: "warning",
+                    title: "Error!",
+                    text: "Invalid username or password.",
+                    confirmButtonText: "Whoops",
+                  });
+                }
+                // Otherwise, return the response as text (the session token)
+                else if (response.status === 403) {
+                  Swal.fire({
+                    icon: "error",
+                    title: "Banned!",
+                    text: "This account has been banned from CrowdCards. See the TOS for more information.",
+                    showCancelButton: true,
+                    confirmButtonText: "Aw, man!",
+                    cancelButtonText: "Open TOS",
+                  }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isDenied) {
+                      window.location.href = "https://cdn.glitch.global/d24a8d52-d1f8-43e5-a4b9-2b8939c0a945/CrowdCards%20TOS%20planning.pdf?v=1675547587832";
+                    }
+                  });
+                } else {
+                  return response.text();
+                }
+              })
+              .then((sessionToken) => {
+                // If session token is returned, store it in local storage along with the user's UUID
+                if (sessionToken) {
+                  localStorage.setItem("uuid", uuid);
+                  localStorage.setItem("sessionToken", sessionToken);
+
+                  document.getElementById("login-btn").innerHTML = "Profile";
+                  document.getElementById("login-btn").href = "/profile";
+                  // Display filler page while logged in
+                  goto("/");
+                }
+                // If no UUID is returned, display an error message
+                else {
+                  Swal.fire({
+                    icon: "warning",
+                    title: "Error!",
+                    text: "Invalid username or password.",
+                    confirmButtonText: "Whoops",
+                  });
+                }
+              });
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Error!",
+              text: "Invalid username or password.",
+              confirmButtonText: "Whoops",
+            });
+          }
+        });
   }
 
   function loginWithErisWS() {
