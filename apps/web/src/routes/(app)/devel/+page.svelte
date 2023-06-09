@@ -382,7 +382,7 @@
 </div>
 
 <div id="a" class="relative overflow-hidden">
-  <div id="background" class="absolute h-max w-max" />
+  <div id="background" class="absolute h-screen w-screen" />
 
   <Card class="relative	z-[900] bg-transparent text-white">
     <CardHeader class="space-y-1">
@@ -423,7 +423,7 @@
         <Input id="password" type="password" autocomplete="password webauthn" class="bg-[#222]" />
       </div>
     </CardContent>
-    <CardFooter>
+    <CardFooter class="pb-0">
       <Button class="w-full" on:click={loginNormally}>Login</Button>
     </CardFooter>
   </Card>
