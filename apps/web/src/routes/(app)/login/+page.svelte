@@ -1,10 +1,21 @@
-<script>
+<script lang="ts">
   import { onMount, onDestroy } from "svelte";
   import { goto } from "$app/navigation";
+  import { messageAction } from "svelte-legos";
   import Swal from "sweetalert2";
-  $: title = `CrowdCards - Login`;
+  import { Button } from "$components/ui/button";
+  import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "$components/ui/card";
+  import { Input } from "$components/ui/input";
+  import { Label } from "$components/ui/label";
 
-  const abortController = new AbortController(); // Used to cancel the Webauthn call from earlier
+  $: title = `CrowdCards - Login (NEW)`;
+
+  const abortController = new AbortController(); // Used to cancel the Webauthn call we use later
+
+  const registerEndpoint = "https://crowdcards-api.glitch.me/webauthn/register";
+  const verifyRegisterEndpoint = "https://crowdcards-api.glitch.me/webauthn/register/verify";
+  const authenticateEndpoint = "https://crowdcards-api.glitch.me/webauthn/authenticate";
+  const verifyAuthenticateEndpoint = "https://crowdcards-api.glitch.me/webauthn/authenticate/verify";
 
   function arrayBufferToBase64Url(arrayBuffer) {
     const byteArray = new Uint8Array(arrayBuffer);
@@ -38,12 +49,7 @@
     return outputArray;
   }
 
-  const registerEndpoint = "https://crowdcards-api.glitch.me/webauthn/register";
-  const verifyRegisterEndpoint = "https://crowdcards-api.glitch.me/webauthn/register/verify";
-  const authenticateEndpoint = "https://crowdcards-api.glitch.me/webauthn/authenticate";
-  const verifyAuthenticateEndpoint = "https://crowdcards-api.glitch.me/webauthn/authenticate/verify";
-
-  async function authenticate() {
+  async function loginWithWebauthn() {
     let hasShownError = false;
 
     abortController.abort(); // Stop Conditional UI so we can authenticate error-less
@@ -64,22 +70,6 @@
 
       console.log(userUUID);
 
-      if (userUUID === "") {
-        const result = await Swal.fire({
-          icon: "warning",
-          title: "No/Invalid username!",
-          text: "You haven't inputted a username, or the one you inputted is invalid. Logging in passwordless will work fine, but it's reccomended to input one anyway in case of issues. Continue?",
-          confirmButtonText: "Continue",
-          showDenyButton: true,
-          denyButtonText: "Exit",
-        });
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isDenied) {
-          hasShownError = true;
-          throw "User denied authentication";
-        }
-      }
-
       const response = await fetch(authenticateEndpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -96,21 +86,13 @@
       options.challenge = base64UrlToUint8Array(options.challenge);
 
       if (JSON.stringify(options.allowCredentials) === JSON.stringify([]) && userUUID !== "") {
-        await Swal.fire({
-          icon: "error",
-          title: "Passwordless not supported!",
-          text: "This user has not registered a passwordless authentication method. If this is you, head over to Settings to add one once you're logged in.",
-        });
+        showMessage("error", "Passwordless not registered!");
 
         hasShownError = true;
 
         throw "Atempted to auth as non-passwordless user";
       } else if (JSON.stringify(options.allowCredentials) === JSON.stringify([]) && userUUID === "") {
-        await Swal.fire({
-          icon: "error",
-          title: "Nobody is passwordless!",
-          text: "Nobody has registered a passwordless authentication method. If this is you, head over to Settings to add one once you're logged in.",
-        });
+        showMessage("error", "No passwordless accounts available!");
 
         hasShownError = true;
 
@@ -155,267 +137,164 @@
       localStorage.setItem("uuid", uuid);
       document.getElementById("login-btn").innerHTML = "Profile";
       document.getElementById("login-btn").href = "/profile";
+      showMessage("success", "Successfully logged in!");
       // Display filler page while logged in
       goto("/");
     } catch (error) {
       console.error("Error during authentication:", error);
 
       if (hasShownError === false) {
-        Swal.fire({
-          icon: "error",
-          title: "Whoops...",
-          text: "Something went wrong while authenticating. This could have many causes- you might have timed out, the API is down, or you didn't add a passwordless auth method. Try again!",
-        });
+        showMessage("error", "Authentication failed!");
       }
     }
   }
 
-  onMount(async () => {
-    document.getElementById("create-user-form").addEventListener("submit", (event) => {
-      event.preventDefault();
+  function loginWithGoogle() {
+    authflow.login({ app_name: "CrowdCards (Google Login via Authflow)", redirect: "https://crowdcards.glitch.me/authflow" });
+  }
 
-      const username = document.getElementById("create-username").value;
-      const password = document.getElementById("create-password").value;
+  function loginNormally() {
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
 
-      // Make POST request to /api/addUser endpoint
-      fetch("https://crowdcards-api.glitch.me/api/addUser", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: username,
-          password: password,
-        }),
+    // Make a GET request to the /api/getUUID endpoint to retrieve the user's UUID
+    fetch("https://crowdcards-api.glitch.me/api/getUUID", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: username,
+        usertype: 1,
+      }),
+    })
+      .then((response) => {
+        return response.text();
       })
-        .then((response) => {
-          return response.text();
-        })
-        .then((uuid) => {
-          if (uuid.startsWith("002")) {
-            Swal.fire({
-              icon: "warning",
-              title: "Error!",
-              text: `Something went wrong. The error returned was ${uuid}.`,
-              confirmButtonText: "Darn it",
-            });
-          } else {
-            Swal.fire({
-              icon: "success",
-              title: "Success!",
-              text: `Your account was created! It's UUID is ${uuid}.`,
-              confirmButtonText: "Awesome!",
-              showDenyButton: true,
-              denyButtonText: "Log into new account",
-            }).then((result) => {
-              /* Read more about isConfirmed, isDenied below */
-              if (result.isDenied) {
-                // If UUID is returned, make a POST request to the /api/startSession endpoint to start a new session
-                if (uuid) {
-                  fetch("https://crowdcards-api.glitch.me/api/startSession", {
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                      UUID: uuid,
-                      password: password,
-                      logintype: 1,
-                    }),
-                  })
-                    .then((response) => {
-                      // If the response status is 400 (Bad Request), display an error message
-                      if (response.status === 400) {
-                        Swal.fire({
-                          icon: "warning",
-                          title: "Error!",
-                          text: "Invalid username or password. This shouldn't have happened, please contact the developers.",
-                          confirmButtonText: ":(",
-                        });
-                      }
-                      // Otherwise, return the response as text (the session token)
-                      else if (response.status === 403) {
-                        Swal.fire({
-                          icon: "error",
-                          title: "Banned!",
-                          text: "This account has been banned from CrowdCards. This should NOT have happened, contact the developers to get your account unbanned.",
-                          confirmButtonText: "Aw, man!",
-                        });
-                      } else {
-                        return response.text();
-                      }
-                    })
-                    .then((sessionToken) => {
-                      // If session token is returned, store it in local storage along with the user's UUID
-                      if (sessionToken) {
-                        localStorage.setItem("uuid", uuid);
-                        localStorage.setItem("sessionToken", sessionToken);
+      .then((uuid) => {
+        // If UUID is returned, make a POST request to the /api/startSession endpoint to start a new session
+        if (uuid) {
+          fetch("https://crowdcards-api.glitch.me/api/startSession", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              UUID: uuid,
+              password: password,
+              logintype: 1,
+            }),
+          })
+            .then((response) => {
+              // If the response status is 400 (Bad Request), display an error message
+              if (response.status === 400) {
+                showMessage("error", "Invalid username / password!");
+              }
+              // Otherwise, return the response as text (the session token)
+              else if (response.status === 403) {
+                Swal.fire({
+                  icon: "error",
+                  title: "Banned!",
+                  text: "This account has been banned from CrowdCards. See the TOS for more information.",
+                  showCancelButton: true,
+                  confirmButtonText: "Aw, man!",
+                  cancelButtonText: "Open TOS",
+                }).then((result) => {
+                  /* Read more about isConfirmed, isDenied below */
+                  if (result.isDenied) {
+                    window.location.href = "https://cdn.glitch.global/d24a8d52-d1f8-43e5-a4b9-2b8939c0a945/CrowdCards%20TOS%20planning.pdf?v=1675547587832";
+                  }
+                });
+              } else {
+                return response.text();
+              }
+            })
+            .then((sessionToken) => {
+              // If session token is returned, store it in local storage along with the user's UUID
+              if (sessionToken) {
+                localStorage.setItem("uuid", uuid);
+                localStorage.setItem("sessionToken", sessionToken);
 
-                        document.getElementById("login-btn").innerHTML = "Profile";
-                        document.getElementById("login-btn").href = "/profile";
-                        // Display filler page while logged in
-                        goto("/");
-                      }
-                      // If no UUID is returned, display an error message
-                      else {
-                        Swal.fire({
-                          icon: "warning",
-                          title: "Error!",
-                          text: "Invalid username or password. This shouldn't have happened, please contact the developers.",
-                          confirmButtonText: ":(",
-                        });
-                      }
-                    });
-                } else {
-                  Swal.fire({
-                    icon: "warning",
-                    title: "Error!",
-                    text: "Invalid username or password. This shouldn't have happened, please contact the developers.",
-                    confirmButtonText: ":(",
-                  });
-                }
+                document.getElementById("login-btn").innerHTML = "Profile";
+                document.getElementById("login-btn").href = "/profile";
+                showMessage("success", "Successfully logged in!");
+                // Display filler page while logged in
+                goto("/");
+              }
+              // If no UUID is returned, display an error message
+              else {
+                showMessage("error", "Invalid username / password!");
               }
             });
-          }
-        });
+        } else {
+          showMessage("error", "Invalid username / password!");
+        }
+      });
+  }
+
+  function loginWithErisWS() {
+    showMessage("info", "This option is not implemented!");
+  }
+
+  function switchToCreateAccount() {
+    goto("/makeaccount");
+  }
+
+  function showMessage(type, text) {
+    const oldElement = document.getElementById("modal");
+    const newElement = oldElement.cloneNode(true);
+    document.getElementById("hmm").appendChild(newElement);
+    document.getElementById("hmm").removeChild(oldElement);
+
+    messageAction(newElement, {
+      message: text,
+      type: type,
     });
-    // Login form submission handler
-    document.getElementById("login-form").addEventListener("submit", (event) => {
-      event.preventDefault();
 
-      const username = document.getElementById("login-username").value;
-      const password = document.getElementById("login-password").value;
+    newElement.click();
+  }
 
-      // Make a GET request to the /api/getUUID endpoint to retrieve the user's UUID
-      fetch("https://crowdcards-api.glitch.me/api/getUUID", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: username,
-          usertype: 1,
-        }),
-      })
-        .then((response) => {
-          return response.text();
-        })
-        .then((uuid) => {
-          // If UUID is returned, make a POST request to the /api/startSession endpoint to start a new session
-          if (uuid) {
-            fetch("https://crowdcards-api.glitch.me/api/startSession", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                UUID: uuid,
-                password: password,
-                logintype: 1,
-              }),
-            })
-              .then((response) => {
-                // If the response status is 400 (Bad Request), display an error message
-                if (response.status === 400) {
-                  Swal.fire({
-                    icon: "warning",
-                    title: "Error!",
-                    text: "Invalid username or password.",
-                    confirmButtonText: "Whoops",
-                  });
-                }
-                // Otherwise, return the response as text (the session token)
-                else if (response.status === 403) {
-                  Swal.fire({
-                    icon: "error",
-                    title: "Banned!",
-                    text: "This account has been banned from CrowdCards. See the TOS for more information.",
-                    showCancelButton: true,
-                    confirmButtonText: "Aw, man!",
-                    cancelButtonText: "Open TOS",
-                  }).then((result) => {
-                    /* Read more about isConfirmed, isDenied below */
-                    if (result.isDenied) {
-                      window.location.href = "https://cdn.glitch.global/d24a8d52-d1f8-43e5-a4b9-2b8939c0a945/CrowdCards%20TOS%20planning.pdf?v=1675547587832";
-                    }
-                  });
-                } else {
-                  return response.text();
-                }
-              })
-              .then((sessionToken) => {
-                // If session token is returned, store it in local storage along with the user's UUID
-                if (sessionToken) {
-                  localStorage.setItem("uuid", uuid);
-                  localStorage.setItem("sessionToken", sessionToken);
+  onMount(async () => {
+    const check = document.getElementById("particle-funny");
 
-                  document.getElementById("login-btn").innerHTML = "Profile";
-                  document.getElementById("login-btn").href = "/profile";
-                  // Display filler page while logged in
-                  goto("/");
-                }
-                // If no UUID is returned, display an error message
-                else {
-                  Swal.fire({
-                    icon: "warning",
-                    title: "Error!",
-                    text: "Invalid username or password.",
-                    confirmButtonText: "Whoops",
-                  });
-                }
-              });
-          } else {
-            Swal.fire({
-              icon: "error",
-              title: "Error!",
-              text: "Invalid username or password.",
-              confirmButtonText: "Whoops",
-            });
-          }
-        });
-    });
-    // Check if session token and UUID are stored in local storage and if so, make a POST request to the /api/checkSession endpoint to verify the session
-    const uuid = localStorage.getItem("uuid");
-    const sessionToken = localStorage.getItem("sessionToken");
-    if (uuid && sessionToken) {
-      fetch("https://crowdcards-api.glitch.me/api/checkSession", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          UUID: uuid,
-          stoken: sessionToken,
-        }),
-      })
-        .then((response) => {
-          return response.text();
-        })
-        .then((data) => {
-          if (data === "001") {
-            // If session is valid, display filler page while logged in
-            document.getElementById("login-btn").innerHTML = "Profile";
-            document.getElementById("login-btn").href = "/profile";
-            goto("/");
-          }
-          // If session is invalid, remove session token and UUID from local storage
-          else {
-            localStorage.removeItem("uuid");
-            localStorage.removeItem("sessionToken");
-          }
-        });
+    if (!check) {
+      const script = document.createElement("script");
+      script.src = "https://unpkg.com/canvas-particle-network";
+      script.id = "particle-funny";
+      script.defer = true;
+      script.onload = function () {
+        var options = {
+          particleColor: "#F2F2F2",
+          background: "#222",
+          speed: "high",
+          density: "medium",
+          interactive: false,
+        };
+        var particleCanvas = new ParticleNetwork(document.getElementById("background"), options);
+
+        document.getElementById("background").style = null;
+      };
+
+      document.head.appendChild(script);
+    } else {
+      var options = {
+        particleColor: "#F2F2F2",
+        background: "#222",
+        speed: "high",
+        density: "medium",
+        interactive: false,
+      };
+      var particleCanvas = new ParticleNetwork(document.getElementById("background"), options);
+
+      document.getElementById("background").style = null;
     }
 
-    // Availability of `window.PublicKeyCredential` means WebAuthn is usable.
     if (window.PublicKeyCredential && PublicKeyCredential.isConditionalMediationAvailable) {
-      console.log("hi");
       // Check if conditional mediation is available.
       const isCMA = await PublicKeyCredential.isConditionalMediationAvailable();
       console.log(isCMA);
 
       if (isCMA) {
-        console.log("pain");
-
         let allowedAuth = false;
 
         try {
@@ -479,16 +358,13 @@
           localStorage.setItem("uuid", uuid);
           document.getElementById("login-btn").innerHTML = "Profile";
           document.getElementById("login-btn").href = "/profile";
+          showMessage("success", "Successfully logged in!");
           // Display filler page while logged in
           goto("/");
         } catch (error) {
           if (allowedAuth === true) {
             console.error("Error during authentication:", error);
-            Swal.fire({
-              icon: "error",
-              title: "Whoops...",
-              text: "Something went wrong while authenticating. This could have many causes- you might have timed out, the API is down, or you didn't add a passwordless auth method. Try again!",
-            });
+            showMessage("error", "Failed to authenticate with the server!");
           }
         }
       }
@@ -500,27 +376,55 @@
   <title>{title}</title>
 </svelte:head>
 
-<h2 class="text-3xl">Create a new user</h2>
-<br />
-<form id="create-user-form">
-  <label for="create-username">Username:</label><br />
-  <input class="rounded-sm text-black" type="text" id="create-username" name="create-username" /><br />
-  <label for="create-password">Password:</label><br />
-  <input class="rounded-sm text-black" type="password" id="create-password" name="create-password" /><br /><br />
-  <button type="submit" class="mb-2 mr-2 rounded-lg bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gradient-to-br focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800">Create User</button>
-</form>
-<br /><br />
-<!-- Login form -->
-<h2 class="text-3xl">Login</h2>
-<br />
-<form id="login-form">
-  <label for="login-username">Username:</label><br />
-  <input class="rounded-sm text-black" type="text" id="login-username" name="login-username" autocomplete="username webauthn" /><br />
-  <br />
-  <button type="button" on:click={authenticate} class="mb-2 mr-2 rounded-lg bg-gradient-to-r from-green-400 via-green-500 to-green-600 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gradient-to-br focus:outline-none focus:ring-4 focus:ring-green-300 dark:focus:ring-green-800">Use Passwordless Auth</button>
-  <br />
-  <label for="login-password">Password:</label><br />
-  <input class="rounded-sm text-black" type="password" id="login-password" name="login-password" autocomplete="password webauthn" /><br /><br />
-  <button type="submit" class="mb-2 mr-2 rounded-lg bg-gradient-to-r from-red-400 via-red-500 to-red-600 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gradient-to-br focus:outline-none focus:ring-4 focus:ring-red-300 dark:focus:ring-red-800">Login</button>
-  <br /> <br />
-</form>
+<div id="hmm">
+  <div id="modal" />
+  <!-- An empty div for shenanagins involving le funny messageAction -->
+</div>
+
+<div id="a" class="relative overflow-hidden">
+  <div id="background" class="absolute h-screen w-screen" />
+
+  <Card class="relative	z-[900] bg-transparent text-white">
+    <CardHeader class="space-y-1">
+      <CardTitle class="text-2xl">Login to an account</CardTitle>
+      <CardDescription>Choose your login method.</CardDescription>
+    </CardHeader>
+    <CardContent class="grid gap-4">
+      <div class="grid grid-cols-3 gap-4">
+        <Button variant="outline" class="bg-slate-950" on:click={loginWithGoogle}>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="The Google logo" class="mr-2 h-4 w-4" />
+          <img src="https://authflow.glitch.me/assets/favicon.svg" alt="The Authflow logo" class="mr-2 h-4 w-4" />
+          Google (Via Authflow)
+        </Button>
+        <Button variant="outline" class="bg-slate-950" on:click={loginWithWebauthn}>Passwordless via Webauthn</Button>
+        <Button variant="outline" class="bg-slate-950" on:click={loginWithErisWS}>
+          <img class="mr-2 h-4 w-4" alt="The empty ErisWS logo" />
+
+          ErisWS
+        </Button>
+      </div>
+
+      <Button variant="outline" class="bg-slate-950" on:click={switchToCreateAccount}>Switch to creating account</Button>
+
+      <div class="relative">
+        <div class="absolute inset-0 flex items-center">
+          <span class="w-full border-t" />
+        </div>
+        <div class="relative flex justify-center text-xs uppercase">
+          <span class="text-muted-foreground bg-[#222] px-2 text-white"> Or continue with </span>
+        </div>
+      </div>
+      <div class="grid gap-2">
+        <Label for="username">Username</Label>
+        <Input id="username" type="username" autocomplete="username webauthn" class="bg-[#222]" />
+      </div>
+      <div class="grid gap-2">
+        <Label for="password">Password</Label>
+        <Input id="password" type="password" autocomplete="password webauthn" class="bg-[#222]" />
+      </div>
+    </CardContent>
+    <CardFooter class="pb-0">
+      <Button class="w-full" on:click={loginNormally}>Login</Button>
+    </CardFooter>
+  </Card>
+</div>
