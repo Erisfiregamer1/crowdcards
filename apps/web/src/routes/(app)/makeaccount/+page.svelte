@@ -123,7 +123,7 @@
   }
 
   function switchToLogIn() {
-    goto("/devel");
+    goto("/login");
   }
 
   function showMessage(type, text) {
