@@ -61,7 +61,7 @@
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: document.getElementById("login-username").value,
+          username: document.getElementById("username").value,
           usertype: 1,
         }),
       });
