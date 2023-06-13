@@ -129,6 +129,18 @@
         });
     }
   });
+  
+  function openSettings() {
+    if (!localStorage.getItem("sessionToken")) {
+      await Swal.fire({
+        icon: "error",
+        title: "Not logged in!",
+        text: "You're not logged in! Log in to access your settings.",
+      });
+    } else {
+      goto("/settings");
+    }
+  }
 
   $: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : "";
 </script>
@@ -153,7 +165,7 @@
     <a href="/offline" role="status" id="offline" class="ml-2 mr-2 text-red-800" aria-label="The offline button that appears when the site is disconnected from the internet." />
 
     <a href="/login" id="login-btn"> Login </a>
-    <a href="/settings"><img class="ml-[20px] inline-block h-auto w-[1.5rem]" src="https://cdn.glitch.global/3de90402-af4c-426a-b746-6b7cb6f31203/139-1393405_file-gear-icon-svg-wikimedia-commons-gear-icon-removebg-preview.png" alt="Settings" /></a>
+    <div id="settings" on:click={openSettings}><img class="ml-[20px] inline-block h-auto w-[1.5rem]" src="https://cdn.glitch.global/3de90402-af4c-426a-b746-6b7cb6f31203/139-1393405_file-gear-icon-svg-wikimedia-commons-gear-icon-removebg-preview.png" alt="Settings" /></div>
   </div>
 </nav>
 

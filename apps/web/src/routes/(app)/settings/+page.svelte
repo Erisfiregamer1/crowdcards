@@ -150,11 +150,12 @@
 
   onMount(() => {
     if (!localStorage.getItem("sessionToken")) {
-      Swal.fire({
+      await Swal.fire({
         icon: "error",
         title: "Not logged in!",
         text: "You're not logged in! Log in to access your settings.",
       });
+      
       goto("/"); // Return to main page to prevent problems.
     }
   });
