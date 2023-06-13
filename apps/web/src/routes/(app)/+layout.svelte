@@ -5,7 +5,10 @@
   import Swal from "sweetalert2";
   import { page } from "$app/stores";
   import { goto } from "$app/navigation";
+  import { fade } from 'svelte/transition'
 
+  export let data
+  
   let ReloadPrompt;
   onMount(async () => {
     goto(`/${window.location.href.match(new RegExp("(?<=https://.*/).*"))}`);
