@@ -18,104 +18,104 @@
 
   function loginNormally() {
     const username = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
+    const password = document.getElementById("password").value;
 
-      // Make POST request to /api/addUser endpoint
-      fetch("https://crowdcards-api.glitch.me/api/addUser", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: username,
-          password: password,
-        }),
+    // Make POST request to /api/addUser endpoint
+    fetch("https://crowdcards-api.glitch.me/api/addUser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      }),
+    })
+      .then((response) => {
+        return response.text();
       })
-        .then((response) => {
-          return response.text();
-        })
-        .then((uuid) => {
-          if (uuid.startsWith("002")) {
-            if (uuid === "002-0002") {
-              showMessage("error", "This account already exists!");
-            } else {
-              showMessage("error", "Something went wrong!");
-            }
+      .then((uuid) => {
+        if (uuid.startsWith("002")) {
+          if (uuid === "002-0002") {
+            showMessage("error", "This account already exists!");
           } else {
-            Swal.fire({
-              icon: "success",
-              title: "Welcome!",
-              text: `Your account was created! It's UUID is ${uuid}.`,
-              confirmButtonText: ":D",
-              showDenyButton: true,
-              denyButtonText: "Log into new account",
-            }).then((result) => {
-              /* Read more about isConfirmed, isDenied below */
-              if (result.isDenied) {
-                // If UUID is returned, make a POST request to the /api/startSession endpoint to start a new session
-                if (uuid) {
-                  fetch("https://crowdcards-api.glitch.me/api/startSession", {
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                      UUID: uuid,
-                      password: password,
-                      logintype: 1,
-                    }),
-                  })
-                    .then((response) => {
-                      // If the response status is 400 (Bad Request), display an error message
-                      if (response.status === 400) {
-                        Swal.fire({
-                          icon: "warning",
-                          title: "Error!",
-                          text: "Invalid username or password. This shouldn't have happened, please contact the developers.",
-                          confirmButtonText: ":(",
-                        });
-                      }
-                      // Otherwise, return the response as text (the session token)
-                      else if (response.status === 403) {
-                        Swal.fire({
-                          icon: "error",
-                          title: "Banned!",
-                          text: "This account has been banned from CrowdCards. This should NOT have happened, contact the developers to get your account unbanned.",
-                          confirmButtonText: "D:",
-                        });
-                      } else {
-                        return response.text();
-                      }
-                    })
-                    .then((sessionToken) => {
-                      // If session token is returned, store it in local storage along with the user's UUID
-                      if (sessionToken) {
-                        localStorage.setItem("uuid", uuid);
-                        localStorage.setItem("sessionToken", sessionToken);
-
-                        document.getElementById("login-btn").innerHTML = "Profile";
-                        document.getElementById("login-btn").href = "/profile";
-                        showMessage("success", "Successfully logged in!");
-                        // Display filler page while logged in
-                        goto("/");
-                      }
-                      // If no UUID is returned, display an error message
-                      else {
-                        showMessage("error", "Invalid username / password! Please contact the developers.");
-                      }
-                    });
-                } else {
-                  Swal.fire({
-                    icon: "warning",
-                    title: "Error!",
-                    text: "Invalid username or password. This shouldn't have happened, please contact the developers.",
-                    confirmButtonText: ":(",
-                  });
-                }
-              }
-            });
+            showMessage("error", "Something went wrong!");
           }
-        });
+        } else {
+          Swal.fire({
+            icon: "success",
+            title: "Welcome!",
+            text: `Your account was created! It's UUID is ${uuid}.`,
+            confirmButtonText: ":D",
+            showDenyButton: true,
+            denyButtonText: "Log into new account",
+          }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isDenied) {
+              // If UUID is returned, make a POST request to the /api/startSession endpoint to start a new session
+              if (uuid) {
+                fetch("https://crowdcards-api.glitch.me/api/startSession", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    UUID: uuid,
+                    password: password,
+                    logintype: 1,
+                  }),
+                })
+                  .then((response) => {
+                    // If the response status is 400 (Bad Request), display an error message
+                    if (response.status === 400) {
+                      Swal.fire({
+                        icon: "warning",
+                        title: "Error!",
+                        text: "Invalid username or password. This shouldn't have happened, please contact the developers.",
+                        confirmButtonText: ":(",
+                      });
+                    }
+                    // Otherwise, return the response as text (the session token)
+                    else if (response.status === 403) {
+                      Swal.fire({
+                        icon: "error",
+                        title: "Banned!",
+                        text: "This account has been banned from CrowdCards. This should NOT have happened, contact the developers to get your account unbanned.",
+                        confirmButtonText: "D:",
+                      });
+                    } else {
+                      return response.text();
+                    }
+                  })
+                  .then((sessionToken) => {
+                    // If session token is returned, store it in local storage along with the user's UUID
+                    if (sessionToken) {
+                      localStorage.setItem("uuid", uuid);
+                      localStorage.setItem("sessionToken", sessionToken);
+
+                      document.getElementById("login-btn").innerHTML = "Profile";
+                      document.getElementById("login-btn").href = "/profile";
+                      showMessage("success", "Successfully logged in!");
+                      // Display filler page while logged in
+                      goto("/");
+                    }
+                    // If no UUID is returned, display an error message
+                    else {
+                      showMessage("error", "Invalid username / password! Please contact the developers.");
+                    }
+                  });
+              } else {
+                Swal.fire({
+                  icon: "warning",
+                  title: "Error!",
+                  text: "Invalid username or password. This shouldn't have happened, please contact the developers.",
+                  confirmButtonText: ":(",
+                });
+              }
+            }
+          });
+        }
+      });
   }
 
   function loginWithErisWS() {

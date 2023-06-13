@@ -5,10 +5,10 @@
   import Swal from "sweetalert2";
   import { page } from "$app/stores";
   import { goto } from "$app/navigation";
-  import { fade } from 'svelte/transition'
+  import { fade } from "svelte/transition";
 
-  export let data
-  
+  export let data;
+
   let ReloadPrompt;
   onMount(async () => {
     goto(`/${window.location.href.match(new RegExp("(?<=https://.*/).*"))}`);
@@ -129,10 +129,10 @@
         });
     }
   });
-  
+
   function openSettings() {
     if (!localStorage.getItem("sessionToken")) {
-      await Swal.fire({
+      Swal.fire({
         icon: "error",
         title: "Not logged in!",
         text: "You're not logged in! Log in to access your settings.",
@@ -172,7 +172,7 @@
 <br />
 
 {#key data.pathname}
-<div in:fade={{ duration: 300, delay: 400 }} out:fade={{ duration: 300 }} class="border-2 border-transparent text-white" id="c">
-  <slot />
-</div>
+  <div in:fade={{ duration: 300, delay: 400 }} out:fade={{ duration: 300 }} class="border-2 border-transparent text-white" id="c">
+    <slot />
+  </div>
 {/key}

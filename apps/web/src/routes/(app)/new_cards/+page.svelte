@@ -1,16 +1,15 @@
 <script>
   import { onMount } from "svelte";
   import Swal from "sweetalert2";
-  
+
   const delay = (delayInms) => {
-    return new Promise(resolve => setTimeout(resolve, delayInms));
-  }
-  
+    return new Promise((resolve) => setTimeout(resolve, delayInms));
+  };
+
   $: title = `CrowdCards - New Cards`;
   onMount(async () => {
-    
-    await delay(400)
-    
+    await delay(400);
+
     fetch("https://crowdcards-api.glitch.me/api/getCardData", {
       method: "GET",
     })
