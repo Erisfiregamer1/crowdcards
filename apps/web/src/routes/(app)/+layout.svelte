@@ -159,6 +159,8 @@
 
 <br />
 
-<div class="border-2 border-transparent text-white" id="c">
+{#key data.pathname}
+<div in:fade={{ duration: 300, delay: 400 }} out:fade={{ duration: 300 }} class="border-2 border-transparent text-white" id="c">
   <slot />
 </div>
+{/key}
