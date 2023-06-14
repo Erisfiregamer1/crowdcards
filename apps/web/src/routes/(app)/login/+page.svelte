@@ -2,7 +2,7 @@
   import { onMount, onDestroy } from "svelte";
   import { goto } from "$app/navigation";
   import { messageAction } from "svelte-legos";
-  import "canvas-particle-network"
+  import { ParticleNetwork } from "canvas-particle-network"
   import Swal from "sweetalert2";
   import { Button } from "$components/ui/button";
   import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "$components/ui/card";
