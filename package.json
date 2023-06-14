@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "sweetalert": "^2.1.2",
-    "svelte-preprocess-import-assets": "^1.0.0"
+    "svelte-preprocess-import-assets": "^1.0.0",
+    "canvas-particle-network": "^1.5.0"
   }
 }
