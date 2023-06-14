@@ -21,7 +21,7 @@
             loop = 1;
             let voted = false;
             // Create the card element
-            document.getElementById("messagelol").innerHTML = ``;
+            document.getElementById("messagelolnc").innerHTML = ``;
             const cardEl = document.createElement("div");
             cardEl.classList.add("card");
             cardEl.innerHTML = `
@@ -204,7 +204,7 @@
         }
 
         if (loop === 0) {
-          document.getElementById("messagelol").innerHTML = `<font color="red">There are no cards in this category yet! Come back later.</font>`;
+          document.getElementById("messagelolnc").innerHTML = `<font color="red">There are no cards in this category yet! Come back later.</font>`;
         }
       });
   });
@@ -215,5 +215,5 @@
 </svelte:head>
 
 <div id="rootnc">
-  <div id="messagelol">Please wait... (If this is taking too long try reloading the page)</div>
+  <div id="messagelolnc">Please wait... (If this is taking too long try reloading the page)</div>
 </div>

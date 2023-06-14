@@ -272,7 +272,7 @@
         };
         var particleCanvas = new ParticleNetwork(document.getElementById("background"), options);
 
-        document.getElementById("background").style = null;
+        document.getElementById("backgroundlogin").style = null;
       };
 
       document.head.appendChild(script);
@@ -286,7 +286,7 @@
       };
       var particleCanvas = new ParticleNetwork(document.getElementById("background"), options);
 
-      document.getElementById("background").style = null;
+      document.getElementById("backgroundlogin").style = null;
     }
 
     if (window.PublicKeyCredential && PublicKeyCredential.isConditionalMediationAvailable) {
@@ -382,7 +382,7 @@
 </div>
 
 <div id="a" class="relative overflow-hidden">
-  <div id="background" class="absolute h-screen w-screen" />
+  <div id="backgroundlogin" class="absolute h-screen w-screen" />
 
   <Card class="relative	z-[900] bg-transparent text-white">
     <CardHeader class="space-y-1">
