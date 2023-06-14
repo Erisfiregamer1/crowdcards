@@ -2,6 +2,7 @@
   import { onMount, onDestroy } from "svelte";
   import { goto } from "$app/navigation";
   import { messageAction } from "svelte-legos";
+  import "canvas-particle-network"
   import Swal from "sweetalert2";
   import { Button } from "$components/ui/button";
   import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "$components/ui/card";
@@ -255,28 +256,6 @@
   }
 
   onMount(async () => {
-    const check = document.getElementById("particle-funny");
-
-    if (!check) {
-      const script = document.createElement("script");
-      script.src = "https://unpkg.com/canvas-particle-network";
-      script.id = "particle-funny";
-      script.defer = true;
-      script.onload = function () {
-        var options = {
-          particleColor: "#F2F2F2",
-          background: "#222",
-          speed: "high",
-          density: "medium",
-          interactive: false,
-        };
-        var particleCanvas = new ParticleNetwork(document.getElementById("backgroundlogin"), options);
-
-        document.getElementById("backgroundlogin").style = null;
-      };
-
-      document.head.appendChild(script);
-    } else {
       var options = {
         particleColor: "#F2F2F2",
         background: "#222",
@@ -287,7 +266,6 @@
       var particleCanvas = new ParticleNetwork(document.getElementById("backgroundlogin"), options);
 
       document.getElementById("backgroundlogin").style = null;
-    }
 
     if (window.PublicKeyCredential && PublicKeyCredential.isConditionalMediationAvailable) {
       // Check if conditional mediation is available.
