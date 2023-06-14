@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount, onDestroy } from "svelte";
   import { goto } from "$app/navigation";
-  import "canvas-particle-network"
+  import "canvas-particle-network";
   import Swal from "sweetalert2";
   import { messageAction } from "svelte-legos";
   import { Button } from "$components/ui/button";
@@ -141,16 +141,16 @@
     newElement.click();
   }
   onMount(async () => {
-      var options = {
-        particleColor: "#F2F2F2",
-        background: "#222",
-        speed: "high",
-        density: "medium",
-        interactive: false,
-      };
-      var particleCanvas = new ParticleNetwork(document.getElementById("background"), options);
+    var options = {
+      particleColor: "#F2F2F2",
+      background: "#222",
+      speed: "high",
+      density: "medium",
+      interactive: false,
+    };
+    var particleCanvas = new ParticleNetwork(document.getElementById("background"), options);
 
-      document.getElementById("background").style = null;
+    document.getElementById("background").style = null;
   });
 </script>
 
