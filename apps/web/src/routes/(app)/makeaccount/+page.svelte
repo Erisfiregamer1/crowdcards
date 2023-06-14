@@ -20,6 +20,11 @@
   function loginNormally() {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
+    
+    if (username === "" || password === "") {
+      showMessage("error", "Please provide a username and password!");
+      return
+    }
 
     // Make POST request to /api/addUser endpoint
     fetch("https://crowdcards-api.glitch.me/api/addUser", {
