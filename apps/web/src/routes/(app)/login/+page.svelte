@@ -247,10 +247,10 @@
   }
 
   function showMessage(type, text) {
-    const oldElement = document.getElementById("modal");
+    const oldElement = document.getElementById("modallogin");
     const newElement = oldElement.cloneNode(true);
-    document.getElementById("hmm").appendChild(newElement);
-    document.getElementById("hmm").removeChild(oldElement);
+    document.getElementById("hmmlogin").appendChild(newElement);
+    document.getElementById("hmmlogin").removeChild(oldElement);
 
     messageAction(newElement, {
       message: text,
@@ -359,8 +359,8 @@
   <title>{title}</title>
 </svelte:head>
 
-<div id="hmm">
-  <div id="modal" />
+<div id="hmmlogin">
+  <div id="modallogin" />
   <!-- An empty div for shenanagins involving le funny messageAction -->
 </div>
 
