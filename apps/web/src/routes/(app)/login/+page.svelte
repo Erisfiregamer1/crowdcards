@@ -270,7 +270,7 @@
           density: "medium",
           interactive: false,
         };
-        var particleCanvas = new ParticleNetwork(document.getElementById("background"), options);
+        var particleCanvas = new ParticleNetwork(document.getElementById("backgroundlogin"), options);
 
         document.getElementById("backgroundlogin").style = null;
       };
@@ -284,7 +284,7 @@
         density: "medium",
         interactive: false,
       };
-      var particleCanvas = new ParticleNetwork(document.getElementById("background"), options);
+      var particleCanvas = new ParticleNetwork(document.getElementById("backgroundlogin"), options);
 
       document.getElementById("backgroundlogin").style = null;
     }
@@ -416,11 +416,11 @@
       </div>
       <div class="grid gap-2">
         <Label for="username">Username</Label>
-        <Input id="username" type="username" autocomplete="username webauthn" class="bg-[#222]" />
+        <Input id="username" type="username" autocomplete="username webauthn" class="bg-[#222]" required/>
       </div>
       <div class="grid gap-2">
         <Label for="password">Password</Label>
-        <Input id="password" type="password" autocomplete="password webauthn" class="bg-[#222]" />
+        <Input id="password" type="password" autocomplete="password webauthn" class="bg-[#222]" required/>
       </div>
     </CardContent>
     <CardFooter class="pb-0">

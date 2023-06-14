@@ -148,7 +148,7 @@
         density: "medium",
         interactive: false,
       };
-      var particleCanvas = new ParticleNetwork(document.getElementById("background"), options);
+      var particleCanvas = new ParticleNetwork(document.getElementById("backgroundreg"), options);
 
       document.getElementById("backgroundreg").style = null;
   });
