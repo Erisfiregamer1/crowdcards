@@ -91,13 +91,13 @@ registerRoute(
   "GET"
 );
 
-// clean old assets
+// Cleanup old assets
 cleanupOutdatedCaches();
 
 let allowlist: undefined | RegExp[];
 if (import.meta.env.DEV) allowlist = [/^\/$/];
 
-// to allow work offline
+// Make it work offline
 registerRoute(new NavigationRoute(createHandlerBoundToURL("/"), { allowlist }));
 
 clientsClaim();

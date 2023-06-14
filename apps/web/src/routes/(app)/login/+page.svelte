@@ -157,6 +157,11 @@
   function loginNormally() {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
+    
+    if (username === "" || password === "") {
+      showMessage("error", "Please provide a username and password!");
+      return
+    }
 
     // Make a GET request to the /api/getUUID endpoint to retrieve the user's UUID
     fetch("https://crowdcards-api.glitch.me/api/getUUID", {
