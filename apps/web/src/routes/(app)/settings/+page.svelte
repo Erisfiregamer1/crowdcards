@@ -161,7 +161,7 @@
   });
 </script>
 
-<button on:click={register} class="mb-4 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"> Register Passwordless Authenticator</button>
+<button on:click={register} class="mb-4 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"> Register Passwordless Authenticator </button>
 <br />
 <br />
 <button on:click={logout} class="mb-4 rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700"> Log Out </button>
