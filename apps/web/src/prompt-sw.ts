@@ -13,7 +13,7 @@ import { NavigationRoute, registerRoute } from "workbox-routing";
 
 declare let self: ServiceWorkerGlobalScope;
 
-self.skipWaiting();
+self.skipWaiting(); // We already tell the user to update, no risk here. Old site content persists until a reload :)
 
 // Push code
 
@@ -70,8 +70,7 @@ precacheAndRoute(self.__WB_MANIFEST);
 import { ExpirationPlugin } from "workbox-expiration";
 import { BackgroundSyncPlugin } from "workbox-background-sync";
 
-// You're not allowed to take my Background Sync from me!
-
+// You're not allowed to take my Background Sync from me! OR my API caching!
 registerRoute(
   /^https:\/\/crowdcards-api\.glitch\.me\/api\/.*/,
   new NetworkFirst({
