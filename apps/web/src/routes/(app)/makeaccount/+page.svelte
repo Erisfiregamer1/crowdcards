@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount, onDestroy } from "svelte";
   import { goto } from "$app/navigation";
-  import "canvas-particle-network"
+  import { default as ParticleNetwork } from "canvas-particle-network"
   import Swal from "sweetalert2";
   import { messageAction } from "svelte-legos";
   import { Button } from "$components/ui/button";
