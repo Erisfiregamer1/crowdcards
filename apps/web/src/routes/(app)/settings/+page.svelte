@@ -25,7 +25,7 @@
         if (permission === "granted") {
           const notification = new Notification("Thanks!", {
             body: "You've enabled notifications for CrowdCards! We'll send you notifications when stuff happens (Namely, your cards have a status change).",
-            icon: "https://cdn.glitch.com/560ed5ed-9d00-433a-9ff9-7750d79d13da%2FGlitch_TeamAvatar.png?v=1624643105812",
+            icon: "https://cdn.glitch.com/560ed5ed-9d00-433a-9ff9-7750d79d13da%2FGlitch_TeamAvatar.png",
           });
 
           Swal.fire({

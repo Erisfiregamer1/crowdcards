@@ -44,7 +44,6 @@
     "prettier-plugin-tailwindcss": "^0.2.7",
     "radix-svelte": "^0.7.1",
     "sharp": "^0.32.1",
-    "snyk": "^1.1154.0",
     "svelte-legos": "^0.2.1",
     "sweetalert2": "^11.7.4",
     "tailwind-merge": "^1.13.0",

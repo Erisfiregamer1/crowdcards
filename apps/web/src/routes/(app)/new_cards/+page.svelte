@@ -1,22 +1,15 @@
 <script>
   import { onMount } from "svelte";
   import Swal from "sweetalert2";
-
-  const delay = (delayInms) => {
-    return new Promise((resolve) => setTimeout(resolve, delayInms));
-  };
-
   $: title = `CrowdCards - New Cards`;
   onMount(async () => {
-    await delay(400);
-
     fetch("https://crowdcards-api.glitch.me/api/getCardData", {
       method: "GET",
     })
       .then((response) => response.json())
       .then((data) => {
         // Get the root element
-        const root = document.getElementById("root2");
+        const root = document.getElementById("rootnc");
 
         // Iterate over the card data and create a card element for each card
 
@@ -221,6 +214,6 @@
   <title>{title}</title>
 </svelte:head>
 
-<div id="root2">
+<div id="rootnc">
   <div id="messagelol">Please wait... (If this is taking too long try reloading the page)</div>
 </div>
