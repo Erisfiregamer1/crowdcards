@@ -1,0 +1,33 @@
+{
+  "private": true,
+  "scripts": {
+    "start": "turbo run dev",
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lhci": "lhci autorun",
+    "deploy": "git add -A && git commit -m 'Production Push'",
+    "lint": "turbo run lint",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "kolorist": "1.8.0",
+    "eslint-config-custom": "*",
+    "prettier": "^2.7.1",
+    "prettier-plugin-svelte": "^2.7.0",
+    "turbo": "latest"
+  },
+  "packageManager": "npm@7.20.6",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=16.x"
+  },
+  "dependencies": {
+    "sweetalert": "^2.1.2",
+    "svelte-preprocess-import-assets": "^1.0.0",
+    "canvas-particle-network": "^1.5.0"
+  }
+}
