@@ -20,7 +20,3 @@
 </div>
 <br />
 <div class="text-[#EF5353]">Warning! CrowdCards is still in Beta Testing, so stuff will be broken. The current version is [DEV 19, Pizza Tower] Beta 2.</div>
-
-<div>
-  // Note to whoever had the amazing idea to forcibly convert the ENTIRE REPOSITORY TO SVELTE 4, WHAT WERE YOU T H I N K I N G
-</div>
