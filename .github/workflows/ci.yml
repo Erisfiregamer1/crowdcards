@@ -33,7 +33,7 @@ jobs:
           restore-keys: npm-
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --force
 
       - name: Build CrowdCards
         run: |
