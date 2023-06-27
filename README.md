@@ -1,3 +1,3 @@
 # CrowdCards
 
-A TCG by ErisWS. Still unfinished:tm:
+A TCG by ErisWS. Still unfinished. We're working on making it cool ;)
